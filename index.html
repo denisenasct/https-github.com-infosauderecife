@@ -24,7 +24,6 @@
         <a href="javascript:void(0);" class="icon" onclick="toggleMenu()">☰</a>
       </div>
     </nav>
-
     <div class="header-content">
       <h1>InfoSaúde Recife</h1>
       <p class="intro">
@@ -46,6 +45,7 @@
 
   <main>
     <div id="map" class="map-container"></div>
+    <div id="map-status"></div>
     <button id="btn-mais-proximo">Posto mais próximo</button>
     <div id="postos-container" class="postos-lista"></div>
   </main>
@@ -84,10 +84,3 @@
   </script>
 </body>
 </html>
-"""
-
-path_index_logo_menu = "/mnt/data/index-logo-menu-final.html"
-with open(path_index_logo_menu, "w", encoding="utf-8") as f:
-    f.write(index_with_logo_menu)
-
-path_index_logo_menu
