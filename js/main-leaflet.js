@@ -6,39 +6,7 @@ function initMap() {
     attribution: "Map data © OpenStreetMap contributors",
   }).addTo(mapa);
 
-  localizarUsuario();
   carregarPostos();
-}
-
-function localizarUsuario() {
-  if (!navigator.geolocation) {
-    alert("Geolocalização não é suportada.");
-    return;
-  }
-
-  navigator.geolocation.getCurrentPosition(pos => {
-    const lat = pos.coords.latitude;
-    const lng = pos.coords.longitude;
-
-    mapa.setView([lat, lng], 15);
-
-    L.marker([lat, lng])
-      .addTo(mapa)
-      .bindPopup("<strong>Você está aqui</strong>")
-      .openPopup();
-
-    const status = document.getElementById("map-status");
-    if (status) {
-      status.innerHTML = `
-        <div class="localizacao-obtida">
-          <strong>Localização obtida</strong><br/>
-          Encontraremos os postos mais próximos de você.
-        </div>
-      `;
-    }
-
-    buscarMaisProximo(lat, lng);
-  });
 }
 
 let postos = [];
@@ -111,6 +79,41 @@ function exibirPostos(lista) {
   });
 }
 
+document.getElementById("btn-mais-proximo").addEventListener("click", () => {
+  localizarUsuario();
+});
+
+function localizarUsuario() {
+  if (!navigator.geolocation) {
+    alert("Geolocalização não é suportada.");
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(pos => {
+    const lat = pos.coords.latitude;
+    const lng = pos.coords.longitude;
+
+    mapa.setView([lat, lng], 15);
+
+    L.marker([lat, lng])
+      .addTo(mapa)
+      .bindPopup("<strong>Você está aqui</strong>")
+      .openPopup();
+
+    const status = document.getElementById("map-status");
+    if (status) {
+      status.innerHTML = `
+        <div class="localizacao-obtida">
+          <strong>Localização obtida</strong><br/>
+          Encontraremos os postos mais próximos de você.
+        </div>
+      `;
+    }
+
+    buscarMaisProximo(lat, lng);
+  });
+}
+
 function buscarMaisProximo(userLat, userLng) {
   if (!postos.length) return;
 
@@ -159,9 +162,6 @@ function distancia(lat1, lon1, lat2, lon2) {
   return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
 }
 
-document.getElementById("btn-mais-proximo").addEventListener("click", () => {
-  localizarUsuario();
-});
-
 document.addEventListener("DOMContentLoaded", initMap);
+
 
