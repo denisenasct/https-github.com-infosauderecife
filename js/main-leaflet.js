@@ -164,3 +164,4 @@ document.getElementById("btn-mais-proximo").addEventListener("click", () => {
 });
 
 document.addEventListener("DOMContentLoaded", initMap);
+
