@@ -1,3 +1,6 @@
+
+// js/main.js atualizado com filtro por bairro, distrito, especialidade e localização atual
+
 let map;
 let markers = [];
 let todosOsPostos = [];
@@ -86,9 +89,11 @@ function exibirPostos(postos) {
     card.className = "card";
     card.innerHTML = `
       <h4>${p.nome}</h4>
+      <p><strong>Endereço:</strong> ${p.endereco || "Não informado"}</p>
       <p><strong>Bairro:</strong> ${p.bairro || "Não informado"}</p>
       <p><strong>Distrito:</strong> ${p.distrito_sanitario || "Não informado"}</p>
       <p><strong>Especialidades:</strong> ${p.especialidades || "Indisponível"}</p>
+      <p><strong>Horário:</strong> ${p.horario || "Indisponível"}</p>
     `;
     container.appendChild(card);
 
@@ -112,27 +117,18 @@ function localizarMaisProximo(postos) {
   navigator.geolocation.getCurrentPosition(pos => {
     const userPos = { lat: pos.coords.latitude, lng: pos.coords.longitude };
     map.setCenter(userPos);
-    map.setZoom(15);
+    map.setZoom(14);
     document.getElementById("notificacao").style.display = "block";
 
-    let menorDist = Infinity;
-    let maisProximo = null;
+    const proximos = postos
+      .map(p => ({
+        ...p,
+        distancia: getDistancia(userPos, { lat: parseFloat(p.latitude), lng: parseFloat(p.longitude) })
+      }))
+      .sort((a, b) => a.distancia - b.distancia)
+      .slice(0, 10); // mostra os 10 mais próximos
 
-    postos.forEach(p => {
-      const dist = getDistancia(userPos, {
-        lat: parseFloat(p.latitude),
-        lng: parseFloat(p.longitude)
-      });
-
-      if (dist < menorDist) {
-        menorDist = dist;
-        maisProximo = p;
-      }
-    });
-
-    if (maisProximo) {
-      map.setCenter({ lat: parseFloat(maisProximo.latitude), lng: parseFloat(maisProximo.longitude) });
-    }
+    exibirPostos(proximos);
   });
 }
 
