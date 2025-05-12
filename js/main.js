@@ -1,3 +1,4 @@
+
 let map;
 let markers = [];
 
@@ -16,7 +17,7 @@ async function initMap() {
 }
 
 async function fetchPostos() {
-  const response = await fetch("https://dados.recife.pe.gov.br/api/3/action/datastore_search?resource_id=54232db8-ed15-4f1f-90b0-2b5a20eef4cf&limit=1000");
+  const response = await fetch("https://corsproxy.io/?https://dados.recife.pe.gov.br/api/3/action/datastore_search?resource_id=54232db8-ed15-4f1f-90b0-2b5a20eef4cf&limit=1000");
   const data = await response.json();
   return data.result.records.filter(p => p.latitude && p.longitude);
 }
@@ -54,8 +55,8 @@ function exibirPostos(postos) {
     card.className = "card";
     card.innerHTML = `
       <h4>${p.nome}</h4>
-      <p><strong>Bairro:</strong> ${p.bairro}</p>
-      <p><strong>Distrito:</strong> ${p.distrito_sanitario}</p>
+      <p><strong>Bairro:</strong> ${p.bairro || "Não informado"}</p>
+      <p><strong>Distrito:</strong> ${p.distrito_sanitario || "Não informado"}</p>
       <p class="status"><i class="fas fa-clock"></i> Horário: ${p.horario || "Indisponível"}</p>
     `;
     container.appendChild(card);
@@ -111,9 +112,8 @@ function getDistancia(coord1, coord2) {
   const lat1 = toRad(coord1.lat);
   const lat2 = toRad(coord2.lat);
 
-  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
-
+  const a = Math.sin(dLat / 2) ** 2 +
+            Math.sin(dLon / 2) ** 2 * Math.cos(lat1) * Math.cos(lat2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * c;
 }
