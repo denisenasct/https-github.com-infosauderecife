@@ -1,175 +1,141 @@
-let mapa;
+
+let mapa = L.map('map').setView([-8.05, -34.9], 12);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap contributors'
+}).addTo(mapa);
+
 let marcadores = [];
-let postos = [];
 
-async function carregarPostos() {
-  try {
-    const resposta = await fetch("data/postos_saude_recife_completo.json");
-    postos = await resposta.json();
-    inicializarMapa();
-    preencherFiltros();
-    exibirPostos(postos);
-  } catch (erro) {
-    console.error("Erro ao carregar JSON:", erro);
-  }
-}
-
-function inicializarMapa() {
-  mapa = L.map("map").setView([-8.0476, -34.877], 12);
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution: "Map data © OpenStreetMap contributors"
-  }).addTo(mapa);
-}
-
-function adicionarMarcador(posto) {
-  const marcador = L.marker([posto.latitude, posto.longitude]).addTo(mapa);
-  marcador.bindPopup(`<strong>${posto.nome_unidade}</strong><br>${posto.endereco}`);
-  marcadores.push(marcador);
-}
-
-function limparMarcadores() {
-  marcadores.forEach((m) => mapa.removeLayer(m));
-  marcadores = [];
-}
-
-function exibirPostos(lista) {
-  limparMarcadores();
-  const container = document.getElementById("postos-container");
-  container.innerHTML = "<h2>Resultados da Busca</h2>";
-  if (lista.length === 0) {
-    container.innerHTML += "<p>Nenhum posto encontrado com os filtros aplicados.</p>";
-    return;
-  }
-
-  container.innerHTML += `<p>${lista.length} posto(s) encontrado(s)</p>`;
-
-  lista.forEach((posto) => {
-    adicionarMarcador(posto);
-    const status = verificarAberto(posto.horario_funcionamento);
-    const selo = status ? '<span class="status-aberto">Aberto agora</span>' : '<span class="status-fechado">Fechado</span>';
-    container.innerHTML += `
-      <div class="posto">
-        <h3>${posto.nome_unidade}</h3>
-        <p><strong>Endereço:</strong> ${posto.endereco}</p>
-        <p><strong>Bairro:</strong> ${posto.bairro}</p>
-        <p><strong>Distrito:</strong> ${posto.distrito_sanitario}</p>
-        <p>${selo}</p>
-      </div>
-    `;
+fetch('data/postos_saude_recife_completo.json')
+  .then(response => response.json())
+  .then(data => {
+    window.postos = data;
+    preencherFiltros(data);
+    exibirPostos(data);
   });
-}
 
-function verificarAberto(horario) {
-  const agora = new Date();
-  const horaAtual = agora.getHours();
-  const match = horario.match(/(\d{2}):(\d{2})\s*ÀS\s*(\d{2}):(\d{2})/);
-  if (!match) return false;
+function preencherFiltros(data) {
+  const bairros = [...new Set(data.map(p => p.bairro))].sort();
+  const especialidades = [...new Set(data.flatMap(p => p.especialidades))].sort();
+  const distritos = [...new Set(data.map(p => p.distrito_sanitario))].sort();
 
-  const [_, h1, m1, h2, m2] = match.map(Number);
-  const inicio = h1 + m1 / 60;
-  const fim = h2 + m2 / 60;
-  return horaAtual >= inicio && horaAtual < fim;
-}
+  const filtroBairro = document.getElementById("filtro-bairro");
+  const filtroEspecialidade = document.getElementById("filtro-especialidade");
+  const filtroDistrito = document.getElementById("filtro-distrito");
 
-function preencherFiltros() {
-  const distritos = [...new Set(postos.map(p => p.distrito_sanitario))].sort();
-  const bairros = [...new Set(postos.map(p => p.bairro))].sort();
-  const especialidades = [...new Set(postos.flatMap(p => p.especialidades))].sort();
+  filtroBairro.innerHTML = '<option value="">Todos</option>';
+  filtroEspecialidade.innerHTML = '<option value="">Todos</option>';
+  filtroDistrito.innerHTML = '<option value="">Todos</option>';
 
-  preencherSelect("filtro-distrito", distritos, "Todos os distritos");
-  preencherSelect("filtro-bairro", bairros, "Todos os bairros");
-  preencherSelect("filtro-especialidade", especialidades, "Todas as especialidades");
+  bairros.forEach(b => filtroBairro.innerHTML += `<option value="${b}">${b}</option>`);
+  especialidades.forEach(e => filtroEspecialidade.innerHTML += `<option value="${e}">${e}</option>`);
+  distritos.forEach(d => filtroDistrito.innerHTML += `<option value="${d}">${d}</option>`);
 
-  document.getElementById("filtro-distrito").addEventListener("change", aplicarFiltros);
-  document.getElementById("filtro-bairro").addEventListener("change", aplicarFiltros);
-  document.getElementById("filtro-especialidade").addEventListener("change", aplicarFiltros);
-}
-
-function preencherSelect(id, lista, padrao) {
-  const select = document.getElementById(id);
-  select.innerHTML = `<option value="">${padrao}</option>`;
-  lista.forEach(item => {
-    const opt = document.createElement("option");
-    opt.value = item;
-    opt.textContent = item;
-    select.appendChild(opt);
-  });
+  filtroBairro.addEventListener('change', aplicarFiltros);
+  filtroEspecialidade.addEventListener('change', aplicarFiltros);
+  filtroDistrito.addEventListener('change', aplicarFiltros);
 }
 
 function aplicarFiltros() {
-  const d = document.getElementById("filtro-distrito").value;
-  const b = document.getElementById("filtro-bairro").value;
-  const e = document.getElementById("filtro-especialidade").value;
+  const bairro = document.getElementById("filtro-bairro").value;
+  const especialidade = document.getElementById("filtro-especialidade").value;
+  const distrito = document.getElementById("filtro-distrito").value;
 
-  const filtrados = postos.filter(p =>
-    (d === "" || p.distrito_sanitario === d) &&
-    (b === "" || p.bairro === b) &&
-    (e === "" || p.especialidades.includes(e))
-  );
+  const filtrados = window.postos.filter(p => {
+    return (!bairro || p.bairro === bairro) &&
+           (!especialidade || p.especialidades.includes(especialidade)) &&
+           (!distrito || p.distrito_sanitario === distrito);
+  });
 
   exibirPostos(filtrados);
 }
 
-function calcularDistancia(p1, p2) {
+function exibirPostos(postos) {
+  marcadores.forEach(m => mapa.removeLayer(m));
+  marcadores = [];
+
+  const container = document.getElementById("postos-container");
+  container.innerHTML = '<h2>Resultados da Busca</h2>';
+  container.innerHTML += `<p>${postos.length} posto(s) encontrado(s)</p>`;
+
+  if (postos.length === 0) {
+    container.innerHTML += '<p class="nenhum-posto">Nenhum posto encontrado com os filtros aplicados.</p>';
+  }
+
+  postos.forEach(p => {
+    const marcador = L.marker([p.latitude, p.longitude])
+      .addTo(mapa)
+      .bindPopup(`<strong>${p.nome_unidade}</strong><br>${p.endereco}`);
+    marcadores.push(marcador);
+
+    const aberto = estaAberto(p.horario_funcionamento);
+    const status = aberto ? '<span class="aberto">Aberto agora</span>' : '<span class="fechado">Fechado</span>';
+
+    container.innerHTML += `
+      <div class="posto-card">
+        <h3>${p.nome_unidade}</h3>
+        <p><strong>Endereço:</strong> ${p.endereco}</p>
+        <p><strong>Bairro:</strong> ${p.bairro}</p>
+        <p><strong>Distrito:</strong> ${p.distrito_sanitario}</p>
+        ${status}
+      </div>`;
+  });
+}
+
+function estaAberto(horario) {
+  const hora = new Date().getHours();
+  const [inicio, fim] = horario.replace("ÀS", "AS").split("AS").map(h => parseInt(h));
+  return hora >= inicio && hora < fim;
+}
+
+function calcularDistancia(a, b) {
   const R = 6371;
-  const dLat = (p2.lat - p1.lat) * Math.PI / 180;
-  const dLon = (p2.lng - p1.lng) * Math.PI / 180;
-  const a = Math.sin(dLat / 2) ** 2 +
-            Math.cos(p1.lat * Math.PI / 180) * Math.cos(p2.lat * Math.PI / 180) *
-            Math.sin(dLon / 2) ** 2;
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const dLat = (b.lat - a.lat) * Math.PI / 180;
+  const dLng = (b.lng - a.lng) * Math.PI / 180;
+  const lat1 = a.lat * Math.PI / 180;
+  const lat2 = b.lat * Math.PI / 180;
+
+  const aCalc = Math.sin(dLat/2)**2 + Math.cos(lat1)*Math.cos(lat2)*Math.sin(dLng/2)**2;
+  const c = 2 * Math.atan2(Math.sqrt(aCalc), Math.sqrt(1 - aCalc));
   return R * c;
 }
 
-function exibirPostoMaisProximo(posto) {
-  const container = document.getElementById("postos-container");
-  const status = verificarAberto(posto.horario_funcionamento);
-  const selo = status ? '<span class="status-aberto">Aberto agora</span>' : '<span class="status-fechado">Fechado</span>';
-  container.innerHTML = `
-    <h2>Posto mais próximo</h2>
-    <div class="posto">
-      <h3>${posto.nome_unidade}</h3>
-      <p><strong>Endereço:</strong> ${posto.endereco}</p>
-      <p><strong>Bairro:</strong> ${posto.bairro}</p>
-      <p><strong>Distrito:</strong> ${posto.distrito_sanitario}</p>
-      <p>${selo}</p>
-    </div>
-  `;
-}
-
 document.getElementById("btn-mais-proximo").addEventListener("click", () => {
-  if (!navigator.geolocation) {
-    alert("Geolocalização não é suportada.");
-    return;
-  }
+  if (!navigator.geolocation) return alert("Geolocalização não suportada");
 
   navigator.geolocation.getCurrentPosition(pos => {
-    const usuario = {
-      lat: pos.coords.latitude,
-      lng: pos.coords.longitude
-    };
+    const usuario = { lat: pos.coords.latitude, lng: pos.coords.longitude };
 
-    let maisProximo = postos[0];
+    L.marker([usuario.lat, usuario.lng])
+      .addTo(mapa)
+      .bindPopup("Você está aqui")
+      .openPopup();
+
+    let maisProximo = window.postos[0];
     let menorDist = calcularDistancia(usuario, {
-      lat: postos[0].latitude,
-      lng: postos[0].longitude
+      lat: maisProximo.latitude,
+      lng: maisProximo.longitude
     });
 
-    for (let i = 1; i < postos.length; i++) {
+    for (let i = 1; i < window.postos.length; i++) {
+      const posto = window.postos[i];
       const dist = calcularDistancia(usuario, {
-        lat: postos[i].latitude,
-        lng: postos[i].longitude
+        lat: posto.latitude,
+        lng: posto.longitude
       });
-
       if (dist < menorDist) {
         menorDist = dist;
-        maisProximo = postos[i];
+        maisProximo = posto;
       }
     }
 
     mapa.setView([maisProximo.latitude, maisProximo.longitude], 15);
-    exibirPostoMaisProximo(maisProximo);
+
+    L.marker([maisProximo.latitude, maisProximo.longitude])
+      .addTo(mapa)
+      .bindPopup(`<strong>${maisProximo.nome_unidade}</strong><br>${maisProximo.endereco}`)
+      .openPopup();
+
+    exibirPostos([maisProximo]);
   });
 });
-
-carregarPostos();
