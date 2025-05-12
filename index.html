@@ -5,82 +5,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>InfoSaúde Recife</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <link rel="stylesheet" href="css/style.css" />
-  <script defer src="js/main-leaflet.js"></script>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <nav class="topnav" id="myTopnav">
-      <div class="nav-left">
-        <img src="Screenshot_20250512_040646_Samsung Internet.jpg" alt="Logo InfoSaúde" class="logo-nav" />
-      </div>
-      <div class="nav-center">
-        <a href="#home" class="active">Início</a>
-        <a href="#missao">Missão</a>
-        <a href="#dicas">Dicas de Saúde</a>
-        <a href="#parceiros">Parceiros</a>
-      </div>
-      <div class="nav-right">
-        <a href="javascript:void(0);" class="icon" onclick="toggleMenu()">☰</a>
-      </div>
-    </nav>
 
-    <div class="header-content">
-      <h1>InfoSaúde Recife</h1>
-      <p class="intro">
-        Plataforma gratuita para localizar postos de saúde, consultar especialidades médicas e saber qual unidade está mais próxima de você.
-      </p>
+  <header class="topo">
+    <div class="logo-container">
+      <img src="Screenshot_20250512_040646_Samsung Internet.jpg" class="logo" alt="Logo InfoSaúde" />
+      <nav class="menu">
+        <ul>
+          <li><a href="#mapa">Mapa</a></li>
+          <li><a href="#postos">Postos de Saúde</a></li>
+          <li><a href="#dicas">Dicas de Saúde</a></li>
+          <li><a href="#sobre">Sobre</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
 
-  <section class="filtros">
-    <label for="filtro-bairro">Bairro:</label>
-    <select id="filtro-bairro"></select>
-
-    <label for="filtro-especialidade">Especialidade:</label>
-    <select id="filtro-especialidade"></select>
-
-    <label for="filtro-distrito">Distrito:</label>
-    <select id="filtro-distrito"></select>
+  <section class="intro">
+    <h1>Encontre postos de saúde em Recife</h1>
+    <p>Utilize os filtros abaixo para localizar os postos de saúde de acordo com suas necessidades.</p>
   </section>
 
-  <main>
-    <div id="map" class="map-container"></div>
-    <button id="btn-mais-proximo">Posto mais próximo</button>
-    <div id="postos-container" class="postos-lista"></div>
-  </main>
+  <section class="filtro-card">
+    <h2>Filtros Avançados</h2>
+    <p>Filtre por especialidade, distrito ou proximidade para encontrar exatamente o que você precisa.</p>
 
-  <section class="cuidados" id="dicas">
-    <h2>Dicas de Saúde</h2>
-    <ul>
-      <li>Lave bem as mãos com frequência</li>
-      <li>Use máscara em locais fechados</li>
-      <li>Evite aglomerações</li>
-      <li>Mantenha sua vacinação em dia</li>
-    </ul>
-    <div class="emergencias">
-      <h3>Números de Emergência</h3>
-      <p><strong>SAMU:</strong> 192</p>
-      <p><strong>Disque Saúde:</strong> 136</p>
-      <p><strong>Vigilância Sanitária:</strong> 0800-281-1520</p>
+    <div class="filtros">
+      <label for="filtro-bairro">Bairro</label>
+      <select id="filtro-bairro"></select>
+
+      <label for="filtro-especialidade">Especialidade</label>
+      <select id="filtro-especialidade"></select>
+
+      <label for="filtro-distrito">Distrito</label>
+      <select id="filtro-distrito"></select>
+    </div>
+
+    <button id="btn-mais-proximo" class="botao-proximo">Posto mais próximo</button>
+  </section>
+
+  <div id="map" class="map-container" style="height: 400px;"></div>
+
+  <section id="postos-container" class="postos-lista"></section>
+
+  <section class="funcionalidades">
+    <div class="icone-bloco">
+      <div class="icone">🔍</div>
+      <h3>Filtros Avançados</h3>
+      <p>Filtre por bairro, especialidade ou distrito para refinar sua busca.</p>
+    </div>
+    <div class="icone-bloco">
+      <div class="icone">ℹ️</div>
+      <h3>Informações Detalhadas</h3>
+      <p>Confira endereço, telefone, horário de funcionamento e especialidades de cada unidade.</p>
     </div>
   </section>
 
-  <section id="parceiros" class="parceiros">
-    <h2>Parceiros</h2>
-    <p>Projeto acadêmico sem fins lucrativos com apoio da comunidade tecnológica e universitária.</p>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 InfoSaúde Recife</p>
+  <footer class="rodape">
+    <div class="contato">
+      <h4>Contato</h4>
+      <p>📍 Cais do Apolo, 925, Recife - PE, 50030-903</p>
+      <p>📞 (81) 3355-8000</p>
+      <p>✉️ contato@infosaude.recife.pe.gov.br</p>
+    </div>
+    <div class="emergencias">
+      <h4>Emergências</h4>
+      <p>✱ SAMU: <strong>192</strong></p>
+      <p>➕ Bombeiros: <strong>193</strong></p>
+      <p>🛡️ Central: <strong>0800 281 1520</strong></p>
+    </div>
   </footer>
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script>
-    function toggleMenu() {
-      const nav = document.getElementById("myTopnav");
-      nav.classList.toggle("responsive");
-    }
-  </script>
+  <script src="js/main-leaflet.js"></script>
 </body>
 </html>
