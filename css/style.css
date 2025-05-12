@@ -477,6 +477,53 @@ header,
   flex-wrap: wrap;
 }
 
+.filtros-bloco {
+  text-align: center;
+  background-color: #f9f9f9;
+  padding: 2rem 1rem;
+}
+
+.filtros-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.filtros-card select {
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+#btn-mais-proximo {
+  background: #007bff;
+  color: white;
+  padding: 0.7rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#btn-mais-proximo:hover {
+  background: #0056b3;
+}
+
+.localizacao-obtida {
+  background-color: #e7f5ff;
+  border-left: 6px solid #007bff;
+  padding: 1rem;
+  margin: 1rem auto;
+  max-width: 400px;
+  text-align: center;
+  font-size: 1rem;
+  color: #004080;
+}
 
 
 
