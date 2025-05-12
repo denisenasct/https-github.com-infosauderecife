@@ -6,7 +6,7 @@ function initMap() {
     attribution: "Map data © OpenStreetMap contributors",
   }).addTo(mapa);
 
-  localizarUsuario(); // já mostra localização ao carregar
+  localizarUsuario();
   carregarPostos();
 }
 
@@ -49,7 +49,6 @@ function carregarPostos() {
     .then(data => {
       postos = data;
       preencherFiltros();
-      exibirPostos(postos);
     });
 }
 
@@ -62,15 +61,12 @@ function preencherFiltros() {
   const selBairro = document.getElementById("filtro-bairro");
   const selEspecialidade = document.getElementById("filtro-especialidade");
 
-  [selDistrito, selBairro, selEspecialidade].forEach(select => select.innerHTML = "<option value=''>Todos</option>");
   distritos.forEach(d => selDistrito.innerHTML += `<option value="${d}">${d}</option>`);
   bairros.forEach(b => selBairro.innerHTML += `<option value="${b}">${b}</option>`);
   especialidades.forEach(e => selEspecialidade.innerHTML += `<option value="${e}">${e}</option>`);
-
-  selDistrito.addEventListener("change", aplicarFiltros);
-  selBairro.addEventListener("change", aplicarFiltros);
-  selEspecialidade.addEventListener("change", aplicarFiltros);
 }
+
+document.getElementById("btn-pesquisar").addEventListener("click", aplicarFiltros);
 
 function aplicarFiltros() {
   const d = document.getElementById("filtro-distrito").value;
@@ -130,12 +126,25 @@ function buscarMaisProximo(userLat, userLng) {
   }
 
   mapa.setView([maisProximo.latitude, maisProximo.longitude], 15);
+
   L.marker([maisProximo.latitude, maisProximo.longitude])
     .addTo(mapa)
     .bindPopup(`<strong>${maisProximo.nome_unidade}</strong><br>${maisProximo.endereco}`)
     .openPopup();
 
-  exibirPostos([maisProximo]);
+  const container = document.getElementById("posto-mais-proximo");
+  const especialidades = maisProximo.especialidades.join(", ");
+  container.innerHTML = `
+    <h2>Posto mais próximo</h2>
+    <div class="posto">
+      <h3>${maisProximo.nome_unidade}</h3>
+      <p><strong>Endereço:</strong> ${maisProximo.endereco}</p>
+      <p><strong>Bairro:</strong> ${maisProximo.bairro}</p>
+      <p><strong>Distrito:</strong> ${maisProximo.distrito_sanitario}</p>
+      <p><strong>Especialidades:</strong> ${especialidades}</p>
+      <p><strong>Horário:</strong> ${maisProximo.horario_funcionamento}</p>
+    </div>
+  `;
 }
 
 function distancia(lat1, lon1, lat2, lon2) {
