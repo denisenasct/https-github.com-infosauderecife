@@ -394,5 +394,89 @@ header,
 .nav-center a.active {
   background-color: #1f1f1f;
 }
+.topo {
+  background-color: #0a2342;
+  padding: 10px;
+  color: white;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  height: 60px;
+}
+
+.menu ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+}
+
+.intro {
+  padding: 20px;
+  text-align: center;
+}
+
+.filtro-card {
+  background: #f2f2f2;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
+}
+
+.filtros {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.botao-proximo {
+  background-color: #0288d1;
+  color: white;
+  border: none;
+  padding: 12px;
+  margin-top: 15px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.funcionalidades {
+  display: flex;
+  justify-content: space-around;
+  padding: 30px 10px;
+  background: #e7f1fc;
+}
+
+.icone-bloco {
+  text-align: center;
+  max-width: 300px;
+}
+
+.icone {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.rodape {
+  background: #0a2342;
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+
 
 
