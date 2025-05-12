@@ -198,3 +198,14 @@ footer {
   padding: 1rem;
   font-size: 0.9rem;
 }
+
+/* Destaque temporário ao navegar */
+.highlight-section {
+  animation: fadeHighlight 1.5s ease-in-out;
+  background-color: #dff6fd !important;
+}
+@keyframes fadeHighlight {
+  from { background-color: #dff6fd; }
+  to { background-color: transparent; }
+}
+
