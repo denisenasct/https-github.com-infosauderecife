@@ -1,5 +1,6 @@
 let map;
 let todosPostos = [];
+let marcadorUsuario;
 
 function initMap() {
   if (navigator.geolocation) {
@@ -9,34 +10,39 @@ function initMap() {
           lat: pos.coords.latitude,
           lng: pos.coords.longitude
         };
-        map = new google.maps.Map(document.getElementById("map"), {
-          center: userLocation,
-          zoom: 13
-        });
-
-        new google.maps.Marker({
-          position: userLocation,
-          map,
-          title: "Você está aqui",
-          icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-        });
-
+        iniciarMapa(userLocation);
         carregarPostos(userLocation);
       },
-      () => fallbackMap()
+      () => {
+        const fallback = { lat: -8.0476, lng: -34.8770 };
+        iniciarMapa(fallback);
+        carregarPostos(fallback);
+      }
     );
   } else {
-    fallbackMap();
+    const fallback = { lat: -8.0476, lng: -34.8770 };
+    iniciarMapa(fallback);
+    carregarPostos(fallback);
   }
 }
 
-function fallbackMap() {
-  const recife = { lat: -8.0476, lng: -34.8770 };
+function iniciarMapa(loc) {
   map = new google.maps.Map(document.getElementById("map"), {
-    center: recife,
-    zoom: 12
+    center: loc,
+    zoom: 13
   });
-  carregarPostos(recife);
+
+  marcadorUsuario = new google.maps.Marker({
+    position: loc,
+    map,
+    title: "Você está aqui",
+    icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+  });
+
+  const btn = document.getElementById("btn-mais-proximo");
+  if (btn) {
+    btn.addEventListener("click", () => centralizarMaisProximo(loc));
+  }
 }
 
 function calcularDistancia(p1, p2) {
@@ -72,8 +78,6 @@ async function carregarPostos(userLoc) {
     exibirPostos(todosPostos, userLoc);
   } catch (e) {
     console.error("Erro ao carregar dados:", e);
-    document.getElementById("postos-container").innerText =
-      "Erro ao carregar os dados dos postos.";
   }
 }
 
@@ -126,10 +130,18 @@ function exibirPostos(postos, userLoc = null) {
 
   filtrados.forEach(p => {
     if (p.latitude && p.longitude) {
-      new google.maps.Marker({
+      const marker = new google.maps.Marker({
         position: { lat: parseFloat(p.latitude), lng: parseFloat(p.longitude) },
         map: map,
         title: p.nome_unidade
+      });
+
+      const infowindow = new google.maps.InfoWindow({
+        content: `<strong>${p.nome_unidade}</strong><br>${p.endereco}`
+      });
+
+      marker.addListener("click", () => {
+        infowindow.open(map, marker);
       });
     }
 
@@ -158,5 +170,21 @@ function exibirPostos(postos, userLoc = null) {
 
   if (filtrados.length === 0) {
     cont.innerHTML = "<p>Nenhum posto encontrado com os filtros aplicados.</p>";
+  }
+}
+
+function centralizarMaisProximo(userLoc) {
+  if (todosPostos.length === 0) return;
+
+  const maisProximo = todosPostos
+    .filter(p => p.distancia !== null)
+    .sort((a, b) => a.distancia - b.distancia)[0];
+
+  if (maisProximo && maisProximo.latitude && maisProximo.longitude) {
+    map.setCenter({
+      lat: parseFloat(maisProximo.latitude),
+      lng: parseFloat(maisProximo.longitude)
+    });
+    map.setZoom(15);
   }
 }
