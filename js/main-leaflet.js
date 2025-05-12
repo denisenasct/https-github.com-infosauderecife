@@ -1,4 +1,4 @@
-""let mapa;
+let mapa;
 
 function initMap() {
   mapa = L.map("map").setView([-8.0476, -34.877], 12);
@@ -127,13 +127,16 @@ function buscarMaisProximo(userLat, userLng) {
     }
   }
 
+  // Centraliza o mapa no posto mais próximo
   mapa.setView([maisProximo.latitude, maisProximo.longitude], 15);
 
+  // Adiciona marcador no mapa
   L.marker([maisProximo.latitude, maisProximo.longitude])
     .addTo(mapa)
     .bindPopup(`<strong>${maisProximo.nome_unidade}</strong><br>${maisProximo.endereco}`)
     .openPopup();
 
+  // Exibe os dados abaixo do mapa
   const container = document.getElementById("posto-mais-proximo");
   const especialidades = maisProximo.especialidades.join(", ");
   container.innerHTML = `
