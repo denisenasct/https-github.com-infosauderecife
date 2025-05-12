@@ -308,3 +308,60 @@ span.status-fechado {
   background-color: #023e8a;
 }
 
+/* Navegação com logo à esquerda e menu à direita */
+.topnav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0077b6;
+  padding: 0.5rem 1rem;
+  flex-wrap: wrap;
+}
+
+.nav-left .logo-nav {
+  height: 40px;
+}
+
+.nav-center a {
+  color: white;
+  padding: 10px 15px;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: bold;
+}
+
+.nav-center a:hover {
+  background-color: #00b4d8;
+  border-radius: 5px;
+}
+
+.nav-center a.active {
+  background-color: #023e8a;
+  border-radius: 5px;
+}
+
+.nav-right a.icon {
+  font-size: 24px;
+  color: white;
+  padding: 0 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .nav-center a {
+    display: none;
+  }
+
+  .topnav.responsive .nav-center a {
+    display: block;
+    text-align: left;
+    width: 100%;
+    padding: 10px;
+  }
+
+  .topnav.responsive {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+
