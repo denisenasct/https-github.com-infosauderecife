@@ -5,11 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>InfoSaúde Recife</title>
   <link rel="stylesheet" href="css/style.css" />
-  <script src="https://maps.googleapis.com/maps/api/js?key=SUA_API_KEY_AQUI&callback=initMap" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=SUA_CHAVE_REAL_AQUI&callback=initMap" async defer></script>
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <!-- Header e navegação -->
   <header class="header">
     <div class="logo">
       <i class="fas fa-shield-virus"></i> <span class="azul">InfoSaúde</span><span class="verde">Recife</span>
@@ -18,43 +17,38 @@
       <a href="#">Início</a>
       <a href="#mapa">Mapa</a>
       <a href="#postos">Postos</a>
-      <a href="#dicas">Dicas</a>
-      <a href="#sobre">Sobre</a>
     </nav>
   </header>
 
-  <!-- Hero -->
   <section class="hero">
-    <h1>Encontre postos de saúde em Recife</h1>
-    <p>Filtre por especialidade, distrito ou localização.</p>
-    <a href="#filtros" class="botao-verde">Encontrar Posto</a>
+    <h1>Postos de Saúde em Recife</h1>
+    <p>Filtre por especialidade, distrito ou bairro</p>
+    <a href="#filtros" class="botao-verde">Ver Mapa</a>
   </section>
 
-  <!-- Mapa -->
   <section id="mapa" class="mapa-area">
     <div id="map" class="mapa-container"></div>
   </section>
 
-  <!-- Filtros -->
   <section id="filtros" class="filtros-card">
     <h2>Filtros Avançados</h2>
     <div class="formulario">
+      <label for="bairro">Bairro</label>
+      <select id="bairro"><option value="">Todos</option></select>
+
       <label for="distrito">Distrito Sanitário</label>
       <select id="distrito"><option value="">Todos</option></select>
 
       <label for="especialidade">Especialidade</label>
       <select id="especialidade"><option value="">Todas</option></select>
 
-      <button id="proximoBtn" class="botao-azul">
-        <i class="fas fa-crosshairs"></i> Posto mais próximo
-      </button>
+      <button id="proximoBtn" class="botao-azul"><i class="fas fa-crosshairs"></i> Posto mais próximo</button>
     </div>
   </section>
 
-  <!-- Resultado -->
   <section class="notificacao" id="notificacao" style="display:none;">
-    <strong>Localização obtida</strong>
-    <p>Posto mais próximo identificado no mapa.</p>
+    <strong>Localização obtida!</strong>
+    <p>Posto mais próximo exibido no mapa.</p>
   </section>
 
   <section class="resultados" id="postos">
@@ -63,17 +57,8 @@
     <div id="resultado-postos"></div>
   </section>
 
-  <!-- Rodapé -->
   <footer class="footer">
-    <div class="footer-logo">
-      <span class="azul">InfoSaúde</span><span class="verde">Recife</span>
-      <p>Facilitando o acesso à saúde pública da cidade.</p>
-    </div>
-    <div class="footer-contato">
-      <p><i class="fas fa-map-marker-alt"></i> Recife - PE</p>
-      <p><i class="fas fa-phone"></i> (81) 3355-8000</p>
-      <p><i class="fas fa-envelope"></i> contato@infosaude.recife.pe.gov.br</p>
-    </div>
+    <p>&copy; 2025 InfoSaúde Recife</p>
   </footer>
 
   <script src="js/main.js"></script>
