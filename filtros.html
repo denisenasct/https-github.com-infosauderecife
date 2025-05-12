@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Filtros - HealthMap Recife</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>Filtrar Postos</h1>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="filtros.html">Filtros</a>
+      <a href="sobre.html">Sobre</a>
+    </nav>
+  </header>
+  <main>
+    <section class="filtros">
+      <label for="bairro">Bairro:</label>
+      <select id="bairro"></select>
+
+      <label for="distrito">Distrito:</label>
+      <select id="distrito"></select>
+
+      <label for="especialidade">Especialidade:</label>
+      <select id="especialidade"></select>
+
+      <button onclick="filtrarPostos()">Aplicar Filtros</button>
+    </section>
+    <section id="resultado-postos"></section>
+  </main>
+  <footer>
+    <p>&copy; 2025 InfoSaúde Recife</p>
+  </footer>
+  <script src="js/filtros.js"></script>
+</body>
+</html>
