@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>InfoSaúde Recife</title>
   <link rel="stylesheet" href="css/style.css" />
-  <script src="https://maps.googleapis.com/maps/api/js?key=CHAVE_REAL_DO_GOOGLE&callback=initMap" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=SUA_API_KEY_AQUI&callback=initMap" async defer></script>
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <!-- HEADER -->
+  <!-- Header e navegação -->
   <header class="header">
     <div class="logo">
       <i class="fas fa-shield-virus"></i> <span class="azul">InfoSaúde</span><span class="verde">Recife</span>
@@ -17,105 +17,62 @@
     <nav class="nav">
       <a href="#">Início</a>
       <a href="#mapa">Mapa</a>
-      <a href="#postos">Postos de Saúde</a>
-      <a href="#dicas">Dicas de Saúde</a>
+      <a href="#postos">Postos</a>
+      <a href="#dicas">Dicas</a>
       <a href="#sobre">Sobre</a>
     </nav>
   </header>
 
-  <!-- HERO SECTION -->
+  <!-- Hero -->
   <section class="hero">
-    <h1>Encontre serviços de saúde próximos a você</h1>
-    <p>Localize postos de saúde em Recife, filtre por especialidade e acesse informações úteis sobre atendimentos médicos.</p>
-    <a href="#filtros" class="botao-verde">Encontrar Posto de Saúde</a>
+    <h1>Encontre postos de saúde em Recife</h1>
+    <p>Filtre por especialidade, distrito ou localização.</p>
+    <a href="#filtros" class="botao-verde">Encontrar Posto</a>
   </section>
 
-  <!-- MAPA -->
+  <!-- Mapa -->
   <section id="mapa" class="mapa-area">
     <div id="map" class="mapa-container"></div>
   </section>
 
-  <!-- FILTROS -->
+  <!-- Filtros -->
   <section id="filtros" class="filtros-card">
-    <h2>Encontre postos de saúde em Recife</h2>
-    <p>Utilize os filtros abaixo para localizar os postos de saúde de acordo com suas necessidades.</p>
-
+    <h2>Filtros Avançados</h2>
     <div class="formulario">
-      <label for="cidade">Cidade</label>
-      <select id="cidade"><option value="Recife">Recife</option></select>
-
       <label for="distrito">Distrito Sanitário</label>
-      <select id="distrito"></select>
+      <select id="distrito"><option value="">Todos</option></select>
 
       <label for="especialidade">Especialidade</label>
-      <select id="especialidade"></select>
+      <select id="especialidade"><option value="">Todas</option></select>
 
-      <button id="proximoBtn" class="botao-azul"><i class="fas fa-crosshairs"></i> Posto mais próximo</button>
+      <button id="proximoBtn" class="botao-azul">
+        <i class="fas fa-crosshairs"></i> Posto mais próximo
+      </button>
     </div>
   </section>
 
-  <!-- NOTIFICAÇÃO GEO -->
+  <!-- Resultado -->
   <section class="notificacao" id="notificacao" style="display:none;">
     <strong>Localização obtida</strong>
-    <p>Encontramos os postos mais próximos de você.</p>
+    <p>Posto mais próximo identificado no mapa.</p>
   </section>
 
-  <!-- RESULTADOS -->
   <section class="resultados" id="postos">
-    <h3>Resultados da Busca</h3>
+    <h3>Postos Encontrados</h3>
     <p id="total-postos"></p>
     <div id="resultado-postos"></div>
   </section>
 
-  <!-- DICAS -->
-  <section id="dicas" class="dicas-area">
-    <div class="info">
-      <i class="fas fa-info-circle"></i>
-      <h3>Informações Detalhadas</h3>
-      <p>Acesse horários de funcionamento, especialidades e serviços oferecidos.</p>
-    </div>
-    <div class="info">
-      <i class="fas fa-filter"></i>
-      <h3>Filtros Avançados</h3>
-      <p>Filtre por especialidade, distrito ou proximidade.</p>
-    </div>
-  </section>
-
-  <!-- SOBRE -->
-  <section class="sobre" id="sobre">
-    <p>Recife conta com mais de 150 unidades de saúde públicas distribuídas em 8 distritos. Nosso objetivo é facilitar o acesso.</p>
-    <a href="#" class="botao-branco">Saiba mais sobre Saúde em Recife</a>
-  </section>
-
-  <!-- FOOTER -->
+  <!-- Rodapé -->
   <footer class="footer">
     <div class="footer-logo">
-      <i class="fas fa-shield-virus"></i> <span class="azul">InfoSaúde</span><span class="verde">Recife</span>
-      <p>Facilitando o acesso à informação sobre saúde pública em Recife.</p>
-      <div class="redes">
-        <i class="fab fa-facebook"></i>
-        <i class="fas fa-mobile-alt"></i>
-        <i class="far fa-envelope"></i>
-      </div>
-    </div>
-    <div class="footer-links">
-      <h4>Links Rápidos</h4>
-      <ul>
-        <li><a href="#">Início</a></li>
-        <li><a href="#mapa">Mapa</a></li>
-        <li><a href="#postos">Postos de Saúde</a></li>
-        <li><a href="#dicas">Dicas de Saúde</a></li>
-        <li><a href="#sobre">Sobre</a></li>
-      </ul>
+      <span class="azul">InfoSaúde</span><span class="verde">Recife</span>
+      <p>Facilitando o acesso à saúde pública da cidade.</p>
     </div>
     <div class="footer-contato">
-      <h4>Contato</h4>
-      <p><i class="fas fa-map-marker-alt"></i> Cais do Apolo, 925, Recife - PE</p>
+      <p><i class="fas fa-map-marker-alt"></i> Recife - PE</p>
       <p><i class="fas fa-phone"></i> (81) 3355-8000</p>
       <p><i class="fas fa-envelope"></i> contato@infosaude.recife.pe.gov.br</p>
-      <h4>Emergências</h4>
-      <p><i class="fas fa-asterisk"></i> SAMU: 192</p>
-      <p><i class="fas fa-plus-square"></i> Bombeiros: 193</p>
     </div>
   </footer>
 
