@@ -11,30 +11,37 @@
 <body>
   <header>
     <nav class="topnav" id="myTopnav">
-      <a href="#home" class="active">Início</a>
-      <a href="#missao">Missão</a>
-      <a href="#dicas">Dicas de Saúde</a>
-      <a href="#parceiros">Parceiros</a>
-      <a href="javascript:void(0);" class="icon" onclick="toggleMenu()">☰</a>
+      <div class="nav-left">
+        <img src="assets/logo-infosaude.png" alt="Logo InfoSaúde" class="logo-nav" />
+      </div>
+      <div class="nav-center">
+        <a href="#home" class="active">Início</a>
+        <a href="#missao">Missão</a>
+        <a href="#dicas">Dicas de Saúde</a>
+        <a href="#parceiros">Parceiros</a>
+      </div>
+      <div class="nav-right">
+        <a href="javascript:void(0);" class="icon" onclick="toggleMenu()">☰</a>
+      </div>
     </nav>
+
     <div class="header-content">
-      <img src="assets/logo-infosaude.png" alt="Logo InfoSaúde" class="logo" />
       <h1>InfoSaúde Recife</h1>
       <p class="intro">
-        Plataforma digital gratuita para localizar o posto de saúde mais próximo, consultar especialidades médicas e melhorar o acesso à saúde pública no Recife.
+        Plataforma gratuita para localizar postos de saúde, consultar especialidades médicas e saber qual unidade está mais próxima de você.
       </p>
     </div>
   </header>
 
   <section class="filtros">
-    <label for="filtro-distrito">Distrito:</label>
-    <select id="filtro-distrito"></select>
-
     <label for="filtro-bairro">Bairro:</label>
     <select id="filtro-bairro"></select>
 
     <label for="filtro-especialidade">Especialidade:</label>
     <select id="filtro-especialidade"></select>
+
+    <label for="filtro-distrito">Distrito:</label>
+    <select id="filtro-distrito"></select>
   </section>
 
   <main>
@@ -46,22 +53,22 @@
   <section class="cuidados" id="dicas">
     <h2>Dicas de Saúde</h2>
     <ul>
+      <li>Lave bem as mãos com frequência</li>
       <li>Use máscara em locais fechados</li>
-      <li>Lave bem as mãos</li>
-      <li>Beba água regularmente</li>
+      <li>Evite aglomerações</li>
       <li>Mantenha sua vacinação em dia</li>
     </ul>
     <div class="emergencias">
       <h3>Números de Emergência</h3>
       <p><strong>SAMU:</strong> 192</p>
-      <p><strong>Vigilância Sanitária:</strong> 0800-281-1520</p>
       <p><strong>Disque Saúde:</strong> 136</p>
+      <p><strong>Vigilância Sanitária:</strong> 0800-281-1520</p>
     </div>
   </section>
 
   <section id="parceiros" class="parceiros">
     <h2>Parceiros</h2>
-    <p>Projeto acadêmico sem fins lucrativos com apoio da comunidade tecnológica.</p>
+    <p>Projeto acadêmico sem fins lucrativos com apoio da comunidade tecnológica e universitária.</p>
   </section>
 
   <footer>
@@ -69,6 +76,11 @@
   </footer>
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById("myTopnav");
+      nav.classList.toggle("responsive");
+    }
+  </script>
 </body>
 </html>
-
