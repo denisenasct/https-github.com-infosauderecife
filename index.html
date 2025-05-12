@@ -10,8 +10,12 @@
 </head>
 <body>
   <header>
-    <img src="assets/logo.png" alt="Logo InfoSaúde" class="logo" />
+    <!-- Substitua o caminho da logo abaixo pela sua imagem -->
+    <img src="assets/logo-infosaude.png" alt="Logo InfoSaúde" class="logo" />
     <h1>InfoSaúde Recife</h1>
+    <p class="intro">
+      Plataforma digital para localizar o posto de saúde mais próximo, consultar especialidades médicas e melhorar o acesso à saúde pública no Recife.
+    </p>
   </header>
 
   <section class="filtros">
@@ -26,14 +30,31 @@
   </section>
 
   <main>
-    <div id="map" class="map-container"></div>
+    <div id="map-wrapper">
+      <div id="map" class="map-container"></div>
+      <button id="btn-mais-proximo">Posto mais próximo</button>
+    </div>
     <div id="postos-container" class="postos-lista"></div>
   </main>
+
+  <section class="cuidados">
+    <h2>Cuidados com a Saúde</h2>
+    <ul>
+      <li>Use máscara em locais fechados</li>
+      <li>Lave bem as mãos</li>
+      <li>Beba água regularmente</li>
+      <li>Mantenha sua vacinação em dia</li>
+    </ul>
+    <div class="emergencias">
+      <h3>Números de Emergência</h3>
+      <p><strong>SAMU:</strong> 192</p>
+      <p><strong>Vigilância Sanitária:</strong> 0800-281-1520</p>
+      <p><strong>Disque Saúde:</strong> 136</p>
+    </div>
+  </section>
 
   <footer>
     <p>&copy; 2025 InfoSaúde Recife</p>
   </footer>
 </body>
 </html>
-
-
