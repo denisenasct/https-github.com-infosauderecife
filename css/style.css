@@ -14,7 +14,7 @@ body {
 /* Menu superior */
 .topnav {
   overflow: hidden;
-  background-color: #0077b6;
+  background-color: #121212;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
