@@ -244,4 +244,67 @@ span.status-fechado {
   display: inline-block;
 }
 
+/* ====== Resultados da Busca - Título e Contador ====== */
+#postos-container h2 {
+  color: #023e8a;
+  font-size: 1.4rem;
+  margin-bottom: 0.3rem;
+  margin-top: 1rem;
+}
+
+#postos-container > div > p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+/* ====== Selo "Aberto agora" e "Fechado" ====== */
+.status-aberto {
+  background-color: #d1f7d6;
+  color: green;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  display: inline-block;
+}
+
+.status-fechado {
+  background-color: #f0f0f0;
+  color: #666;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  display: inline-block;
+}
+
+/* ====== Destaque ao clicar no menu (scroll suave) ====== */
+.highlight-section {
+  animation: fadeHighlight 1.5s ease-in-out;
+  background-color: #dff6fd !important;
+}
+
+@keyframes fadeHighlight {
+  from { background-color: #dff6fd; }
+  to { background-color: transparent; }
+}
+
+/* ====== Botão "Posto mais próximo" ====== */
+#btn-mais-proximo {
+  display: block;
+  margin: 1rem auto;
+  background-color: #0077b6;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+#btn-mais-proximo:hover {
+  background-color: #023e8a;
+}
 
