@@ -32,6 +32,14 @@ function preencherFiltros() {
   distritos.forEach(d => selDistrito.innerHTML += `<option value="${d}">${d}</option>`);
   bairros.forEach(b => selBairro.innerHTML += `<option value="${b}">${b}</option>`);
   especialidades.forEach(e => selEspecialidade.innerHTML += `<option value="${e}">${e}</option>`);
+
+  selBairro.addEventListener("change", () => {
+    const bairroSelecionado = selBairro.value;
+    const postoCorrespondente = postos.find(p => p.bairro === bairroSelecionado);
+    if (postoCorrespondente) {
+      selDistrito.value = postoCorrespondente.distrito_sanitario;
+    }
+  });
 }
 
 document.getElementById("btn-pesquisar").addEventListener("click", aplicarFiltros);
