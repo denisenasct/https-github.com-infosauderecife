@@ -1,30 +1,66 @@
 body {
-  font-family: sans-serif;
+  font-family: Arial, sans-serif;
+  background-color: #f0f8ff;
   margin: 0;
-  background-color: #eef6fb;
+  padding: 0;
 }
 
 header {
-  background-color: #0074cc;
+  background-color: #0077b6;
   color: white;
-  padding: 1rem;
   text-align: center;
+  padding: 1rem;
+}
+
+.logo {
+  width: 80px;
+  height: auto;
+  margin-bottom: 10px;
 }
 
 .filtros {
-  margin-top: 1rem;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 1rem;
+  padding: 1rem;
+  background-color: #caf0f8;
+}
+
+.filtros label {
+  font-weight: bold;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
 }
 
 .map-container {
+  width: 90%;
   height: 400px;
-  margin: 20px;
   border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
 }
 
-#postos-container {
-  padding: 20px;
+.postos-lista {
+  width: 90%;
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+.postos-lista div {
+  margin-bottom: 1rem;
+}
+
+footer {
+  background-color: #03045e;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
 }
