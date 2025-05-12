@@ -21,25 +21,21 @@ function carregarPostos() {
 }
 
 function preencherFiltros() {
-  const distritos = [...new Set(postos.map(p => p.distrito_sanitario))];
-  const bairros = [...new Set(postos.map(p => p.bairro))];
-  const especialidades = [...new Set(postos.flatMap(p => p.especialidades))];
+  const distritos = [...new Set(postos.map(p => p.distrito_sanitario))].sort();
+  const bairros = [...new Set(postos.map(p => p.bairro))].sort();
+  const especialidades = [...new Set(postos.flatMap(p => p.especialidades))].sort();
 
   const selDistrito = document.getElementById("filtro-distrito");
   const selBairro = document.getElementById("filtro-bairro");
   const selEspecialidade = document.getElementById("filtro-especialidade");
 
+  selDistrito.innerHTML = '<option value="">Nenhum</option>';
+  selBairro.innerHTML = '<option value="">Nenhum</option>';
+  selEspecialidade.innerHTML = '<option value="">Nenhum</option>';
+
   distritos.forEach(d => selDistrito.innerHTML += `<option value="${d}">${d}</option>`);
   bairros.forEach(b => selBairro.innerHTML += `<option value="${b}">${b}</option>`);
   especialidades.forEach(e => selEspecialidade.innerHTML += `<option value="${e}">${e}</option>`);
-
-  selBairro.addEventListener("change", () => {
-    const bairroSelecionado = selBairro.value;
-    const postoCorrespondente = postos.find(p => p.bairro === bairroSelecionado);
-    if (postoCorrespondente) {
-      selDistrito.value = postoCorrespondente.distrito_sanitario;
-    }
-  });
 }
 
 document.getElementById("btn-pesquisar").addEventListener("click", aplicarFiltros);
@@ -171,5 +167,6 @@ function distancia(lat1, lon1, lat2, lon2) {
 }
 
 document.addEventListener("DOMContentLoaded", initMap);
+
 
 
