@@ -104,17 +104,7 @@ function exibirPostos(postos) {
     marcadores.push(marker);
 
     const div = document.createElement("div");
-    div.innerHTML = `
-      <h3>${p.nome_unidade}</h3>
-      <p><strong>Endereço:</strong> ${p.endereco}</p>
-      <p><strong>Bairro:</strong> ${p.bairro}</p>
-      <p><strong>Distrito:</strong> ${p.distrito_sanitario}</p>
-      <p><strong>Telefone:</strong> ${p.telefone}</p>
-      <p><strong>Horário:</strong> ${p.horario_funcionamento}</p>
-      <p><strong>Especialidades:</strong> ${p.especialidades.join(", ")}</p>
-      <p><strong>Distância:</strong> ${p.distancia.toFixed(2)} km</p>
-      <hr/>
-    `;
+    div.innerHTML = gerarHTMLPosto(p);
     container.appendChild(div);
   });
 
@@ -123,10 +113,49 @@ function exibirPostos(postos) {
   }
 }
 
+function gerarHTMLPosto(p) {
+  return `
+    <h3>${p.nome_unidade}</h3>
+    <p><strong>Endereço:</strong> ${p.endereco}</p>
+    <p><strong>Bairro:</strong> ${p.bairro}</p>
+    <p><strong>Distrito:</strong> ${p.distrito_sanitario}</p>
+    <p><strong>Telefone:</strong> ${p.telefone}</p>
+    <p><strong>Horário:</strong> ${p.horario_funcionamento}</p>
+    <p><strong>Especialidades:</strong> ${p.especialidades.join(", ")}</p>
+    <p><strong>Distância:</strong> ${p.distancia.toFixed(2)} km</p>
+    <hr/>
+  `;
+}
+
 function centralizarMaisProximo(userLoc) {
   if (!todosPostos.length) return;
-  const maisProximo = todosPostos.sort((a, b) => a.distancia - b.distancia)[0];
+  const maisProximo = todosPostos
+    .filter(p => p.latitude && p.longitude)
+    .sort((a, b) => a.distancia - b.distancia)[0];
+
   map.setView([maisProximo.latitude, maisProximo.longitude], 15);
+
+  const container = document.getElementById("postos-container");
+  container.innerHTML = "<h2>Posto mais próximo:</h2>";
+  const div = document.createElement("div");
+  div.innerHTML = gerarHTMLPosto(maisProximo);
+  container.appendChild(div);
 }
+
+// Scroll suave ao clicar nos links do menu
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', function (e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Destaque temporário
+      target.classList.add('highlight-section');
+      setTimeout(() => {
+        target.classList.remove('highlight-section');
+      }, 1500);
+    }
+  });
+});
 
 document.addEventListener("DOMContentLoaded", initMap);
