@@ -81,6 +81,34 @@ function preencherSelect(id, lista) {
   });
 }
 
+function gerarHTMLPosto(p) {
+  const horaAgora = new Date();
+  const [hInicio, mInicio] = p.horario_funcionamento.split("ÀS")[0].trim().split(":");
+  const [hFim, mFim] = p.horario_funcionamento.split("ÀS")[1].trim().split(":");
+  const inicio = new Date();
+  inicio.setHours(parseInt(hInicio), parseInt(mInicio));
+  const fim = new Date();
+  fim.setHours(parseInt(hFim), parseInt(mFim));
+  const aberto = horaAgora >= inicio && horaAgora <= fim;
+
+  const status = aberto
+    ? "<span style='color: green; font-weight: bold'>✔️ Aberto agora</span>"
+    : "<span style='color: gray;'>Fechado</span>";
+
+  return `
+    <h3>${p.nome_unidade}</h3>
+    <p><strong>Endereço:</strong> ${p.endereco}</p>
+    <p><strong>Bairro:</strong> ${p.bairro}</p>
+    <p><strong>Distrito:</strong> ${p.distrito_sanitario}</p>
+    <p><strong>Telefone:</strong> ${p.telefone}</p>
+    <p><strong>Horário:</strong> ${p.horario_funcionamento}</p>
+    <p><strong>Especialidades:</strong> ${p.especialidades.join(", ")}</p>
+    <p>${status}</p>
+    <p><strong>Distância:</strong> ${p.distancia.toFixed(2)} km</p>
+    <hr/>
+  `;
+}
+
 function exibirPostos(postos) {
   const distrito = document.getElementById("filtro-distrito").value;
   const bairro = document.getElementById("filtro-bairro").value;
@@ -98,6 +126,15 @@ function exibirPostos(postos) {
   const container = document.getElementById("postos-container");
   container.innerHTML = "";
 
+  if (filtrados.length === 0) {
+    container.innerHTML = "<h2>Resultados da Busca</h2><p>Nenhum posto encontrado com os filtros aplicados.</p>";
+    return;
+  }
+
+  const titulo = document.createElement("div");
+  titulo.innerHTML = `<h2>Resultados da Busca</h2><p><strong>${filtrados.length} posto(s) encontrado(s)</strong></p>`;
+  container.appendChild(titulo);
+
   filtrados.forEach(p => {
     const marker = L.marker([p.latitude, p.longitude]).addTo(map)
       .bindPopup(`<strong>${p.nome_unidade}</strong><br>${p.endereco}`);
@@ -107,24 +144,6 @@ function exibirPostos(postos) {
     div.innerHTML = gerarHTMLPosto(p);
     container.appendChild(div);
   });
-
-  if (filtrados.length === 0) {
-    container.innerHTML = "<p>Nenhum posto encontrado com os filtros aplicados.</p>";
-  }
-}
-
-function gerarHTMLPosto(p) {
-  return `
-    <h3>${p.nome_unidade}</h3>
-    <p><strong>Endereço:</strong> ${p.endereco}</p>
-    <p><strong>Bairro:</strong> ${p.bairro}</p>
-    <p><strong>Distrito:</strong> ${p.distrito_sanitario}</p>
-    <p><strong>Telefone:</strong> ${p.telefone}</p>
-    <p><strong>Horário:</strong> ${p.horario_funcionamento}</p>
-    <p><strong>Especialidades:</strong> ${p.especialidades.join(", ")}</p>
-    <p><strong>Distância:</strong> ${p.distancia.toFixed(2)} km</p>
-    <hr/>
-  `;
 }
 
 function centralizarMaisProximo(userLoc) {
@@ -149,7 +168,6 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     if (target) {
       e.preventDefault();
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      // Destaque temporário
       target.classList.add('highlight-section');
       setTimeout(() => {
         target.classList.remove('highlight-section');
