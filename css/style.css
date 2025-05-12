@@ -376,4 +376,23 @@ span.status-fechado {
   object-fit: contain;
 }
 
+/* Fundo escuro do header e da barra de navegação para combinar com a logo */
+header,
+.topnav,
+.top-logo {
+  background-color: #121212; /* tom escuro como na imagem da logo */
+  color: white;
+}
+
+/* Links do menu com contraste */
+.nav-center a,
+.nav-right a.icon {
+  color: white;
+}
+
+.nav-center a:hover,
+.nav-center a.active {
+  background-color: #1f1f1f;
+}
+
 
