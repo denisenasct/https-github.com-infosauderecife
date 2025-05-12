@@ -56,10 +56,10 @@ function aplicarFiltros() {
 
 function exibirPostos(lista) {
   const container = document.getElementById("postos-container");
-  container.innerHTML = "<h2>Resultados da Busca</h2>";
+  container.innerHTML = "";
 
   if (lista.length === 0) {
-    container.innerHTML += "<p>Nenhum posto encontrado com os filtros aplicados.</p>";
+    container.innerHTML = "<p>Nenhum posto encontrado com os filtros aplicados.</p>";
     return;
   }
 
@@ -69,17 +69,19 @@ function exibirPostos(lista) {
       .bindPopup(`<strong>${p.nome_unidade}</strong><br>${p.endereco}`);
 
     const especialidades = p.especialidades.join(", ");
-    const card = `
-      <div class="posto">
-        <h3>${p.nome_unidade}</h3>
-        <p><strong>Endereço:</strong> ${p.endereco}</p>
-        <p><strong>Bairro:</strong> ${p.bairro}</p>
-        <p><strong>Distrito:</strong> ${p.distrito_sanitario}</p>
-        <p><strong>Especialidades:</strong> ${especialidades}</p>
-        <p><strong>Horário:</strong> ${p.horario_funcionamento}</p>
-      </div>
+    const card = document.createElement("div");
+    card.classList.add("posto");
+
+    card.innerHTML = `
+      <h3>${p.nome_unidade}</h3>
+      <p><strong>Endereço:</strong> ${p.endereco}</p>
+      <p><strong>Bairro:</strong> ${p.bairro}</p>
+      <p><strong>Distrito:</strong> ${p.distrito_sanitario}</p>
+      <p><strong>Especialidades:</strong> ${especialidades}</p>
+      <p><strong>Horário:</strong> ${p.horario_funcionamento}</p>
     `;
-    container.innerHTML += card;
+
+    container.appendChild(card);
   });
 }
 
