@@ -526,4 +526,32 @@ header,
 }
 
 
+header {
+  background-image: url('fundo.JPG'); /* ou 'images/fundo.JPG' se estiver numa pasta */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 300px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
 
+.header-content {
+  background-color: rgba(0, 0, 0, 0.5); /* fundo semitransparente para melhor leitura */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.header-content h1 {
+  margin: 0;
+  font-size: 2.5em;
+}
+
+.header-content p {
+  margin: 0;
+  font-size: 1.2em;
+}
