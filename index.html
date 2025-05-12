@@ -1,3 +1,6 @@
+# Gerar index.html final com logo à esquerda e menu responsivo à direita, com JS incluído
+
+index_with_logo_menu = """
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -84,3 +87,10 @@
   </script>
 </body>
 </html>
+"""
+
+path_index_logo_menu = "/mnt/data/index-logo-menu-final.html"
+with open(path_index_logo_menu, "w", encoding="utf-8") as f:
+    f.write(index_with_logo_menu)
+
+path_index_logo_menu
