@@ -1,89 +1,86 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>InfoSaúde Recife</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="leaflet.css" />
-  </head>
-  <body>
-    <header>
-      <div class="logo-header">
-        <img src="Screenshot_20250512_040646_Samsung Internet.jpg" alt="Logo InfoSaúde" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InfoSaúde Recife</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script defer src="js/main-leaflet.js"></script>
+</head>
+<body>
+  <header>
+    <nav class="topnav" id="myTopnav">
+      <div class="nav-left">
+        <img src="assets/logo-infosaude.png" alt="Logo InfoSaúde" class="logo-nav" />
       </div>
-      <nav class="menu">
-        <div class="menu-toggle" id="menu-toggle">
-          <span class="menu-icon">&#9776;</span>
-        </div>
-        <ul class="menu-list" id="menu-list">
-          <li><a href="#">Missão</a></li>
-          <li><a href="#">Dicas de Saúde</a></li>
-          <li><a href="#">Parceiros</a></li>
-        </ul>
-      </nav>
-    </header>
-
-    <section class="main-content">
-      <div class="filters">
-        <div class="filter">
-          <label for="bairro">Bairro</label>
-          <select id="bairro">
-            <!-- Adicione os bairros aqui -->
-          </select>
-        </div>
-        <div class="filter">
-          <label for="especialidade">Especialidade</label>
-          <select id="especialidade">
-            <!-- Adicione as especialidades aqui -->
-          </select>
-        </div>
-        <div class="filter">
-          <label for="distrito">Distrito</label>
-          <select id="distrito">
-            <!-- Adicione os distritos aqui -->
-          </select>
-        </div>
+      <div class="nav-center">
+        <a href="#home" class="active">Início</a>
+        <a href="#missao">Missão</a>
+        <a href="#dicas">Dicas de Saúde</a>
+        <a href="#parceiros">Parceiros</a>
       </div>
-
-      <div class="results-section">
-        <h2>Resultados da Busca</h2>
-        <div id="result-count"></div>
-        <div id="postos-list"></div>
-        <div id="no-results" class="no-results">Nenhum posto encontrado com os filtros aplicados</div>
+      <div class="nav-right">
+        <a href="javascript:void(0);" class="icon" onclick="toggleMenu()">☰</a>
       </div>
+    </nav>
 
-      <div id="map" style="height: 500px;"></div>
-    </section>
+    <div class="header-content">
+      <h1>InfoSaúde Recife</h1>
+      <p class="intro">
+        Plataforma gratuita para localizar postos de saúde, consultar especialidades médicas e saber qual unidade está mais próxima de você.
+      </p>
+    </div>
+  </header>
 
-    <footer>
-      <div class="emergency-info">
-        <div class="emergency">
-          <i class="emergency-icon">&#128222;</i>
-          <span>Emergências: 192</span>
-        </div>
-        <div class="emergency">
-          <i class="emergency-icon">&#9742;</i>
-          <span>Samur: 193</span>
-        </div>
-        <div class="emergency">
-          <i class="emergency-icon">&#128221;</i>
-          <span>Polícia: 190</span>
-        </div>
-      </div>
-    </footer>
+  <section class="filtros">
+    <label for="filtro-bairro">Bairro:</label>
+    <select id="filtro-bairro"></select>
 
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="script.js"></script>
-    <script>
-      // Lógica para menu toggle
-      const menuToggle = document.getElementById('menu-toggle');
-      const menuList = document.getElementById('menu-list');
-      
-      menuToggle.addEventListener('click', () => {
-        menuList.classList.toggle('active');
-      });
-    </script>
-  </body>
+    <label for="filtro-especialidade">Especialidade:</label>
+    <select id="filtro-especialidade"></select>
+
+    <label for="filtro-distrito">Distrito:</label>
+    <select id="filtro-distrito"></select>
+  </section>
+
+  <main>
+    <div id="map" class="map-container"></div>
+    <button id="btn-mais-proximo">Posto mais próximo</button>
+    <div id="postos-container" class="postos-lista"></div>
+  </main>
+
+  <section class="cuidados" id="dicas">
+    <h2>Dicas de Saúde</h2>
+    <ul>
+      <li>Lave bem as mãos com frequência</li>
+      <li>Use máscara em locais fechados</li>
+      <li>Evite aglomerações</li>
+      <li>Mantenha sua vacinação em dia</li>
+    </ul>
+    <div class="emergencias">
+      <h3>Números de Emergência</h3>
+      <p><strong>SAMU:</strong> 192</p>
+      <p><strong>Disque Saúde:</strong> 136</p>
+      <p><strong>Vigilância Sanitária:</strong> 0800-281-1520</p>
+    </div>
+  </section>
+
+  <section id="parceiros" class="parceiros">
+    <h2>Parceiros</h2>
+    <p>Projeto acadêmico sem fins lucrativos com apoio da comunidade tecnológica e universitária.</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 InfoSaúde Recife</p>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById("myTopnav");
+      nav.classList.toggle("responsive");
+    }
+  </script>
+</body>
 </html>
