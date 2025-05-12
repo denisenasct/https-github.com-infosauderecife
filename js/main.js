@@ -4,7 +4,7 @@ let todosOsPostos = [];
 
 async function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: -8.0476, lng: -34.8770 },
+    center: { lat: -8.0476, lng: -34.877 },
     zoom: 12,
   });
 
@@ -12,49 +12,62 @@ async function initMap() {
   preencherFiltros(todosOsPostos);
   exibirPostos(todosOsPostos);
 
-  document.getElementById("proximoBtn").addEventListener("click", () => localizarMaisProximo(todosOsPostos));
+  document.getElementById("bairro").addEventListener("change", aplicarFiltro);
   document.getElementById("distrito").addEventListener("change", aplicarFiltro);
   document.getElementById("especialidade").addEventListener("change", aplicarFiltro);
+  document.getElementById("proximoBtn").addEventListener("click", () => localizarMaisProximo(todosOsPostos));
 }
 
 async function fetchPostos() {
   try {
-    const response = await fetch("https://corsproxy.io/?https://dados.recife.pe.gov.br/api/3/action/datastore_search?resource_id=54232db8-ed15-4f1f-90b0-2b5a20eef4cf&limit=1000");
+    const url = "https://api.allorigins.win/raw?url=" + encodeURIComponent("https://dados.recife.pe.gov.br/api/3/action/datastore_search?resource_id=54232db8-ed15-4f1f-90b0-2b5a20eef4cf&limit=1000");
+    const response = await fetch(url);
     const data = await response.json();
     return data.result.records.filter(p => p.latitude && p.longitude);
   } catch (err) {
-    alert("Erro ao carregar dados da Prefeitura.");
+    alert("Erro ao buscar dados da Prefeitura.");
     return [];
   }
 }
 
 function preencherFiltros(postos) {
-  const distritoSelect = document.getElementById("distrito");
-  const especialidadeSelect = document.getElementById("especialidade");
+  const bairroSel = document.getElementById("bairro");
+  const distritoSel = document.getElementById("distrito");
+  const espSel = document.getElementById("especialidade");
 
+  const bairros = [...new Set(postos.map(p => p.bairro).filter(Boolean))].sort();
   const distritos = [...new Set(postos.map(p => p.distrito_sanitario).filter(Boolean))].sort();
   const especialidades = [...new Set(postos.map(p => p.especialidades).filter(Boolean))].sort();
+
+  bairros.forEach(b => {
+    const opt = document.createElement("option");
+    opt.value = b;
+    opt.textContent = b;
+    bairroSel.appendChild(opt);
+  });
 
   distritos.forEach(d => {
     const opt = document.createElement("option");
     opt.value = d;
     opt.textContent = d;
-    distritoSelect.appendChild(opt);
+    distritoSel.appendChild(opt);
   });
 
   especialidades.forEach(e => {
     const opt = document.createElement("option");
     opt.value = e;
     opt.textContent = e;
-    especialidadeSelect.appendChild(opt);
+    espSel.appendChild(opt);
   });
 }
 
 function aplicarFiltro() {
+  const bairro = document.getElementById("bairro").value;
   const distrito = document.getElementById("distrito").value;
   const especialidade = document.getElementById("especialidade").value;
 
   const filtrados = todosOsPostos.filter(p =>
+    (!bairro || p.bairro === bairro) &&
     (!distrito || p.distrito_sanitario === distrito) &&
     (!especialidade || p.especialidades === especialidade)
   );
@@ -129,7 +142,6 @@ function getDistancia(coord1, coord2) {
   const dLon = toRad(coord2.lng - coord1.lng);
   const lat1 = toRad(coord1.lat);
   const lat2 = toRad(coord2.lat);
-
   const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon / 2) ** 2;
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * c;
