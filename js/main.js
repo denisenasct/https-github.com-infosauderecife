@@ -13,17 +13,17 @@ function initMap() {
         iniciarMapa(userLocation);
         carregarPostos(userLocation);
       },
-      () => {
-        const fallback = { lat: -8.0476, lng: -34.8770 };
-        iniciarMapa(fallback);
-        carregarPostos(fallback);
-      }
+      () => fallback()
     );
   } else {
-    const fallback = { lat: -8.0476, lng: -34.8770 };
-    iniciarMapa(fallback);
-    carregarPostos(fallback);
+    fallback();
   }
+}
+
+function fallback() {
+  const recife = { lat: -8.0476, lng: -34.8770 };
+  iniciarMapa(recife);
+  carregarPostos(recife);
 }
 
 function iniciarMapa(loc) {
@@ -52,8 +52,8 @@ function calcularDistancia(p1, p2) {
   const a =
     Math.sin(dLat / 2) ** 2 +
     Math.cos(p1.lat * Math.PI / 180) *
-      Math.cos(p2.lat * Math.PI / 180) *
-      Math.sin(dLng / 2) ** 2;
+    Math.cos(p2.lat * Math.PI / 180) *
+    Math.sin(dLng / 2) ** 2;
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * c;
 }
@@ -62,20 +62,18 @@ async function carregarPostos(userLoc) {
   try {
     const res = await fetch("data/postos_saude_recife_completo.json");
     const dados = await res.json();
+    console.log("Dados carregados:", dados);
 
     todosPostos = dados.map(p => ({
       ...p,
-      distancia:
-        p.latitude && p.longitude
-          ? calcularDistancia(userLoc, {
-              lat: parseFloat(p.latitude),
-              lng: parseFloat(p.longitude)
-            })
-          : null
+      distancia: calcularDistancia(userLoc, {
+        lat: parseFloat(p.latitude),
+        lng: parseFloat(p.longitude)
+      })
     }));
 
     preencherFiltros(todosPostos);
-    exibirPostos(todosPostos, userLoc);
+    exibirPostos(todosPostos);
   } catch (e) {
     console.error("Erro ao carregar dados:", e);
   }
@@ -85,9 +83,7 @@ function preencherFiltros(postos) {
   const distritos = [...new Set(postos.map(p => p.distrito_sanitario).filter(Boolean))].sort();
   const bairros = [...new Set(postos.map(p => p.bairro).filter(Boolean))].sort();
   const especialidades = [
-    ...new Set(
-      postos.flatMap(p => p.especialidades || []).map(e => e.trim()).filter(Boolean)
-    )
+    ...new Set(postos.flatMap(p => p.especialidades || []).map(e => e.trim()).filter(Boolean))
   ].sort();
 
   preencherSelect("filtro-distrito", distritos);
@@ -110,40 +106,36 @@ function preencherSelect(id, lista) {
   });
 }
 
-function exibirPostos(postos, userLoc = null) {
+function exibirPostos(postos) {
   const distrito = document.getElementById("filtro-distrito").value;
   const bairro = document.getElementById("filtro-bairro").value;
   const espec = document.getElementById("filtro-especialidade").value;
 
-  const filtrados = postos
-    .filter(p => {
-      return (
-        (!distrito || p.distrito_sanitario === distrito) &&
-        (!bairro || p.bairro === bairro) &&
-        (!espec || (p.especialidades && p.especialidades.includes(espec)))
-      );
-    })
-    .sort((a, b) => (a.distancia ?? 999) - (b.distancia ?? 999));
+  const filtrados = postos.filter(p => {
+    return (
+      (!distrito || p.distrito_sanitario === distrito) &&
+      (!bairro || p.bairro === bairro) &&
+      (!espec || (p.especialidades && p.especialidades.includes(espec)))
+    );
+  });
 
   const cont = document.getElementById("postos-container");
   cont.innerHTML = "";
 
   filtrados.forEach(p => {
-    if (p.latitude && p.longitude) {
-      const marker = new google.maps.Marker({
-        position: { lat: parseFloat(p.latitude), lng: parseFloat(p.longitude) },
-        map: map,
-        title: p.nome_unidade
-      });
+    const marker = new google.maps.Marker({
+      position: { lat: parseFloat(p.latitude), lng: parseFloat(p.longitude) },
+      map,
+      title: p.nome_unidade
+    });
 
-      const infowindow = new google.maps.InfoWindow({
-        content: `<strong>${p.nome_unidade}</strong><br>${p.endereco}`
-      });
+    const infowindow = new google.maps.InfoWindow({
+      content: `<strong>${p.nome_unidade}</strong><br>${p.endereco}`
+    });
 
-      marker.addListener("click", () => {
-        infowindow.open(map, marker);
-      });
-    }
+    marker.addListener("click", () => {
+      infowindow.open(map, marker);
+    });
 
     const div = document.createElement("div");
     div.innerHTML = `
@@ -151,18 +143,10 @@ function exibirPostos(postos, userLoc = null) {
       <p><strong>Endereço:</strong> ${p.endereco}</p>
       <p><strong>Bairro:</strong> ${p.bairro}</p>
       <p><strong>Distrito:</strong> ${p.distrito_sanitario}</p>
-      <p><strong>Telefone:</strong> ${p.telefone || "Não informado"}</p>
-      <p><strong>Horário:</strong> ${p.horario_funcionamento || "Não informado"}</p>
-      ${
-        p.especialidades?.length
-          ? `<p><strong>Especialidades:</strong> ${p.especialidades.join(", ")}</p>`
-          : ""
-      }
-      ${
-        p.distancia
-          ? `<p><strong>Distância:</strong> ${p.distancia.toFixed(2)} km</p>`
-          : ""
-      }
+      <p><strong>Telefone:</strong> ${p.telefone}</p>
+      <p><strong>Horário:</strong> ${p.horario_funcionamento}</p>
+      <p><strong>Especialidades:</strong> ${p.especialidades.join(", ")}</p>
+      <p><strong>Distância:</strong> ${p.distancia.toFixed(2)} km</p>
       <hr/>
     `;
     cont.appendChild(div);
@@ -174,17 +158,8 @@ function exibirPostos(postos, userLoc = null) {
 }
 
 function centralizarMaisProximo(userLoc) {
-  if (todosPostos.length === 0) return;
-
-  const maisProximo = todosPostos
-    .filter(p => p.distancia !== null)
-    .sort((a, b) => a.distancia - b.distancia)[0];
-
-  if (maisProximo && maisProximo.latitude && maisProximo.longitude) {
-    map.setCenter({
-      lat: parseFloat(maisProximo.latitude),
-      lng: parseFloat(maisProximo.longitude)
-    });
-    map.setZoom(15);
-  }
+  if (!todosPostos.length) return;
+  const maisProximo = todosPostos.sort((a, b) => a.distancia - b.distancia)[0];
+  map.setCenter({ lat: parseFloat(maisProximo.latitude), lng: parseFloat(maisProximo.longitude) });
+  map.setZoom(15);
 }
