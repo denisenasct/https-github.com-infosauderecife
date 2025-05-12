@@ -209,3 +209,39 @@ footer {
   to { background-color: transparent; }
 }
 
+/* Estilo para título de resultados */
+#postos-container h2 {
+  color: #023e8a;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* Contador de postos encontrados */
+#postos-container > div > p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+/* Selo de status aberto/fechado */
+span.status-aberto {
+  background-color: #d1f7d6;
+  color: green;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  display: inline-block;
+}
+
+span.status-fechado {
+  background-color: #f0f0f0;
+  color: #666;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  display: inline-block;
+}
+
+
