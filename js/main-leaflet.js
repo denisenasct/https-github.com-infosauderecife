@@ -92,8 +92,8 @@ function gerarHTMLPosto(p) {
   const aberto = horaAgora >= inicio && horaAgora <= fim;
 
   const status = aberto
-    ? "<span style='color: green; font-weight: bold'>✔️ Aberto agora</span>"
-    : "<span style='color: gray;'>Fechado</span>";
+    ? "<span class='status-aberto'>✔️ Aberto agora</span>"
+    : "<span class='status-fechado'>Fechado</span>";
 
   return `
     <h3>${p.nome_unidade}</h3>
@@ -177,3 +177,4 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 });
 
 document.addEventListener("DOMContentLoaded", initMap);
+
