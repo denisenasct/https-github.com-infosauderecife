@@ -1,172 +1,144 @@
 body {
-  font-family: "Segoe UI", sans-serif;
-  background-color: #f9f9f9;
-  color: #222;
+  font-family: 'Segoe UI', sans-serif;
   margin: 0;
-  padding: 0;
+  background-color: #f5f8fa;
+  color: #333;
 }
 
 header {
   background-color: #0a2c56;
-  color: white;
-  padding: 1rem;
-}
-
-.topnav {
+  padding: 1rem 2rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
-.topnav a {
-  color: white;
-  padding: 0.5rem 1rem;
-  text-decoration: none;
-  font-weight: bold;
+.logo-nav {
+  max-height: 60px;
+  width: auto;
+  object-fit: contain;
 }
 
-.topnav .icon {
+nav.menu-scroll {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 0.5rem 0;
+}
+nav.menu-scroll::-webkit-scrollbar {
   display: none;
 }
+nav.menu-scroll a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+nav.menu-scroll a:hover {
+  background-color: #1d4e89;
+}
 
-.filtros-bloco {
-  background-color: #ffffff;
+.intro {
+  background-color: #e3ecf5;
   padding: 2rem;
-  box-shadow: 0 0 10px rgba(0,0,0,0.05);
-  margin-top: 1rem;
   text-align: center;
 }
 
-.filtros-bloco h2 {
+h1, h2 {
   color: #0a2c56;
 }
 
-.filtros-card {
-  max-width: 400px;
-  margin: 1rem auto;
+.filtros {
+  background-color: #ffffff;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  max-width: 600px;
+  margin: 2rem auto;
 }
 
-.filtros-card select {
-  padding: 0.5rem;
+.filtros select, .filtros button {
+  padding: 0.75rem;
+  border-radius: 6px;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  font-size: 1rem;
 }
 
-.filtros-card button#btn-pesquisar {
+.filtros button {
   background-color: #0a2c56;
   color: white;
-  font-weight: bold;
-  padding: 0.75rem;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
   cursor: pointer;
-  transition: background 0.3s ease;
+}
+.filtros button:hover {
+  background-color: #123d75;
 }
 
-.filtros-card button#btn-pesquisar:hover {
-  background-color: #083052;
-}
-
-#postos-container, #posto-mais-proximo {
-  padding: 2rem 1rem 1rem 1rem;
-  text-align: left;
-}
-
-.posto {
-  background: #fff;
-  border-left: 4px solid #0a2c56;
+.resultados, #posto-mais-proximo {
+  max-width: 800px;
+  margin: 2rem auto;
   padding: 1rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 0 5px rgba(0,0,0,0.05);
-  border-radius: 6px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
 }
 
-.map-container {
+#map {
   height: 400px;
   margin: 2rem auto;
   max-width: 90%;
-  border-radius: 10px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  border: 2px solid #0a2c56;
+  border-radius: 8px;
 }
 
 #btn-mais-proximo {
+  margin: 1rem auto;
+  display: block;
   background-color: #0a2c56;
   color: white;
-  font-weight: bold;
+  padding: 0.8rem 1.5rem;
   border: none;
-  padding: 0.6rem 1rem;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
-  display: block;
-  margin: 1rem auto;
 }
-
 #btn-mais-proximo:hover {
-  background-color: #093253;
+  background-color: #123d75;
 }
 
-.localizacao-obtida {
-  background-color: #e7f5ff;
-  border-left: 6px solid #0a2c56;
-  padding: 1rem;
-  margin: 1rem auto;
-  max-width: 400px;
+.cuidados {
+  background-color: #e3ecf5;
+  padding: 2rem;
   text-align: center;
-  font-size: 1rem;
-  color: #004080;
+}
+.cuidados ul {
+  list-style: none;
+  padding: 0;
+}
+.cuidados li {
+  margin: 0.5rem 0;
+}
+.cuidados .leia-mais {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #0a2c56;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+}
+.cuidados .leia-mais:hover {
+  background-color: #123d75;
 }
 
 footer {
   background-color: #0a2c56;
   color: white;
-  padding: 2rem 1rem;
   text-align: center;
-  position: relative;
+  padding: 2rem;
 }
-
-.footer-contact {
-  font-size: 1rem;
-  margin-top: 1rem;
-  color: #d4d4d4;
+footer p, footer h3 {
+  margin: 0.5rem 0;
 }
-
-.footer-contact p {
-  margin: 0.3rem 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-.footer-contact i {
-  color: #ffffff;
-}
-
-.botao-leia-mais {
-  display: inline-block;
-  padding: 0.6rem 1.2rem;
-  background-color: #0a2c56;
-  color: white;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: bold;
-  margin-top: 1rem;
-}
-
-.botao-leia-mais:hover {
-  background-color: #093253;
-}
-
-@media (max-width: 600px) {
-  .topnav .nav-center {
-    display: none;
-  }
-  .topnav .icon {
-    display: block;
-  }
-}
-
