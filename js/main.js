@@ -1,6 +1,6 @@
-
 let map;
 let markers = [];
+let todosOsPostos = [];
 
 async function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
@@ -8,26 +8,32 @@ async function initMap() {
     zoom: 12,
   });
 
-  const postos = await fetchPostos();
+  todosOsPostos = await fetchPostos();
+  preencherFiltros(todosOsPostos);
+  exibirPostos(todosOsPostos);
 
-  preencherFiltros(postos);
-  exibirPostos(postos);
+  document.getElementById("proximoBtn").addEventListener("click", () => localizarMaisProximo(todosOsPostos));
 
-  document.getElementById("proximoBtn").addEventListener("click", () => localizarMaisProximo(postos));
+  document.getElementById("distrito").addEventListener("change", aplicarFiltro);
+  document.getElementById("especialidade").addEventListener("change", aplicarFiltro);
 }
 
 async function fetchPostos() {
-  const response = await fetch("https://corsproxy.io/?https://dados.recife.pe.gov.br/api/3/action/datastore_search?resource_id=54232db8-ed15-4f1f-90b0-2b5a20eef4cf&limit=1000");
-  const data = await response.json();
-  return data.result.records.filter(p => p.latitude && p.longitude);
+  try {
+    const response = await fetch("https://corsproxy.io/?https://dados.recife.pe.gov.br/api/3/action/datastore_search?resource_id=54232db8-ed15-4f1f-90b0-2b5a20eef4cf&limit=1000");
+    const data = await response.json();
+    return data.result.records.filter(p => p.latitude && p.longitude);
+  } catch (error) {
+    console.error("Erro ao buscar dados da API:", error);
+    return [];
+  }
 }
 
 function preencherFiltros(postos) {
-  const distritos = [...new Set(postos.map(p => p.distrito_sanitario).filter(Boolean))].sort();
-  const especialidades = [...new Set(postos.map(p => p.especialidades).filter(Boolean))].sort();
-
   const selDistrito = document.getElementById("distrito");
   const selEspecialidade = document.getElementById("especialidade");
+
+  const distritos = [...new Set(postos.map(p => p.distrito_sanitario).filter(Boolean))].sort();
 
   distritos.forEach(d => {
     const opt = document.createElement("option");
@@ -36,12 +42,26 @@ function preencherFiltros(postos) {
     selDistrito.appendChild(opt);
   });
 
+  // Preenche todas as especialidades inicialmente
+  const especialidades = [...new Set(postos.map(p => p.especialidades).filter(Boolean))].sort();
   especialidades.forEach(e => {
     const opt = document.createElement("option");
     opt.value = e;
     opt.textContent = e;
     selEspecialidade.appendChild(opt);
   });
+}
+
+function aplicarFiltro() {
+  const distritoSelecionado = document.getElementById("distrito").value;
+  const especialidadeSelecionada = document.getElementById("especialidade").value;
+
+  const filtrados = todosOsPostos.filter(p =>
+    (!distritoSelecionado || p.distrito_sanitario === distritoSelecionado) &&
+    (!especialidadeSelecionada || p.especialidades === especialidadeSelecionada)
+  );
+
+  exibirPostos(filtrados);
 }
 
 function exibirPostos(postos) {
@@ -102,6 +122,9 @@ function localizarMaisProximo(postos) {
     if (maisProximo) {
       map.setCenter({ lat: parseFloat(maisProximo.latitude), lng: parseFloat(maisProximo.longitude) });
     }
+  }, err => {
+    alert("Erro ao obter sua localização.");
+    console.error(err);
   });
 }
 
