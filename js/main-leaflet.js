@@ -66,9 +66,11 @@ function preencherFiltros() {
   distritos.forEach(d => selDistrito.innerHTML += `<option value="${d}">${d}</option>`);
   bairros.forEach(b => selBairro.innerHTML += `<option value="${b}">${b}</option>`);
   especialidades.forEach(e => selEspecialidade.innerHTML += `<option value="${e}">${e}</option>`);
-}
 
-document.getElementById("btn-pesquisar").addEventListener("click", aplicarFiltros);
+  selDistrito.addEventListener("change", aplicarFiltros);
+  selBairro.addEventListener("change", aplicarFiltros);
+  selEspecialidade.addEventListener("change", aplicarFiltros);
+}
 
 function aplicarFiltros() {
   const d = document.getElementById("filtro-distrito").value;
@@ -127,29 +129,13 @@ function buscarMaisProximo(userLat, userLng) {
     }
   }
 
-  // Centraliza o mapa no posto mais próximo
   mapa.setView([maisProximo.latitude, maisProximo.longitude], 15);
-
-  // Adiciona marcador no mapa
   L.marker([maisProximo.latitude, maisProximo.longitude])
     .addTo(mapa)
     .bindPopup(`<strong>${maisProximo.nome_unidade}</strong><br>${maisProximo.endereco}`)
     .openPopup();
 
-  // Exibe os dados abaixo do mapa
-  const container = document.getElementById("posto-mais-proximo");
-  const especialidades = maisProximo.especialidades.join(", ");
-  container.innerHTML = `
-    <h2>Posto mais próximo</h2>
-    <div class="posto">
-      <h3>${maisProximo.nome_unidade}</h3>
-      <p><strong>Endereço:</strong> ${maisProximo.endereco}</p>
-      <p><strong>Bairro:</strong> ${maisProximo.bairro}</p>
-      <p><strong>Distrito:</strong> ${maisProximo.distrito_sanitario}</p>
-      <p><strong>Especialidades:</strong> ${especialidades}</p>
-      <p><strong>Horário:</strong> ${maisProximo.horario_funcionamento}</p>
-    </div>
-  `;
+  exibirPostos([maisProximo]);
 }
 
 function distancia(lat1, lon1, lat2, lon2) {
