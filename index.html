@@ -1,84 +1,89 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>InfoSaúde Recife</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-
-  <header class="topo">
-    <div class="logo-container">
-      <img src="Screenshot_20250512_040646_Samsung Internet.jpg" class="logo" alt="Logo InfoSaúde" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InfoSaúde Recife</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="leaflet.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo-header">
+        <img src="Screenshot_20250512_040646_Samsung Internet.jpg" alt="Logo InfoSaúde" />
+      </div>
       <nav class="menu">
-        <ul>
-          <li><a href="#mapa">Mapa</a></li>
-          <li><a href="#postos">Postos de Saúde</a></li>
-          <li><a href="#dicas">Dicas de Saúde</a></li>
-          <li><a href="#sobre">Sobre</a></li>
+        <div class="menu-toggle" id="menu-toggle">
+          <span class="menu-icon">&#9776;</span>
+        </div>
+        <ul class="menu-list" id="menu-list">
+          <li><a href="#">Missão</a></li>
+          <li><a href="#">Dicas de Saúde</a></li>
+          <li><a href="#">Parceiros</a></li>
         </ul>
       </nav>
-    </div>
-  </header>
+    </header>
 
-  <section class="intro">
-    <h1>Encontre postos de saúde em Recife</h1>
-    <p>Utilize os filtros abaixo para localizar os postos de saúde de acordo com suas necessidades.</p>
-  </section>
+    <section class="main-content">
+      <div class="filters">
+        <div class="filter">
+          <label for="bairro">Bairro</label>
+          <select id="bairro">
+            <!-- Adicione os bairros aqui -->
+          </select>
+        </div>
+        <div class="filter">
+          <label for="especialidade">Especialidade</label>
+          <select id="especialidade">
+            <!-- Adicione as especialidades aqui -->
+          </select>
+        </div>
+        <div class="filter">
+          <label for="distrito">Distrito</label>
+          <select id="distrito">
+            <!-- Adicione os distritos aqui -->
+          </select>
+        </div>
+      </div>
 
-  <section class="filtro-card">
-    <h2>Filtros Avançados</h2>
-    <p>Filtre por especialidade, distrito ou proximidade para encontrar exatamente o que você precisa.</p>
+      <div class="results-section">
+        <h2>Resultados da Busca</h2>
+        <div id="result-count"></div>
+        <div id="postos-list"></div>
+        <div id="no-results" class="no-results">Nenhum posto encontrado com os filtros aplicados</div>
+      </div>
 
-    <div class="filtros">
-      <label for="filtro-bairro">Bairro</label>
-      <select id="filtro-bairro"></select>
+      <div id="map" style="height: 500px;"></div>
+    </section>
 
-      <label for="filtro-especialidade">Especialidade</label>
-      <select id="filtro-especialidade"></select>
+    <footer>
+      <div class="emergency-info">
+        <div class="emergency">
+          <i class="emergency-icon">&#128222;</i>
+          <span>Emergências: 192</span>
+        </div>
+        <div class="emergency">
+          <i class="emergency-icon">&#9742;</i>
+          <span>Samur: 193</span>
+        </div>
+        <div class="emergency">
+          <i class="emergency-icon">&#128221;</i>
+          <span>Polícia: 190</span>
+        </div>
+      </div>
+    </footer>
 
-      <label for="filtro-distrito">Distrito</label>
-      <select id="filtro-distrito"></select>
-    </div>
-
-    <button id="btn-mais-proximo" class="botao-proximo">Posto mais próximo</button>
-  </section>
-
-  <div id="map" class="map-container" style="height: 400px;"></div>
-
-  <section id="postos-container" class="postos-lista"></section>
-
-  <section class="funcionalidades">
-    <div class="icone-bloco">
-      <div class="icone">🔍</div>
-      <h3>Filtros Avançados</h3>
-      <p>Filtre por bairro, especialidade ou distrito para refinar sua busca.</p>
-    </div>
-    <div class="icone-bloco">
-      <div class="icone">ℹ️</div>
-      <h3>Informações Detalhadas</h3>
-      <p>Confira endereço, telefone, horário de funcionamento e especialidades de cada unidade.</p>
-    </div>
-  </section>
-
-  <footer class="rodape">
-    <div class="contato">
-      <h4>Contato</h4>
-      <p>📍 Cais do Apolo, 925, Recife - PE, 50030-903</p>
-      <p>📞 (81) 3355-8000</p>
-      <p>✉️ contato@infosaude.recife.pe.gov.br</p>
-    </div>
-    <div class="emergencias">
-      <h4>Emergências</h4>
-      <p>✱ SAMU: <strong>192</strong></p>
-      <p>➕ Bombeiros: <strong>193</strong></p>
-      <p>🛡️ Central: <strong>0800 281 1520</strong></p>
-    </div>
-  </footer>
-
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script src="js/main-leaflet.js"></script>
-</body>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+    <script>
+      // Lógica para menu toggle
+      const menuToggle = document.getElementById('menu-toggle');
+      const menuList = document.getElementById('menu-list');
+      
+      menuToggle.addEventListener('click', () => {
+        menuList.classList.toggle('active');
+      });
+    </script>
+  </body>
 </html>
