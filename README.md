@@ -258,7 +258,7 @@ ___
 
 
 
-## Screecast com URL e Histórias Implementadas
+## Screencast com URL e Histórias Implementadas
 
 
 
