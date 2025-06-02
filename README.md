@@ -262,9 +262,7 @@ ___
 
 
 
-## Issue/bug tracker atualizado 
-
-# 🐛 Bug: Geolocalização retorna posição incorreta (mar) ao clicar em “Posto mais próximo”
+## Issue/bug tracker atualizado : Geolocalização retorna posição incorreta (mar) ao clicar em “Posto mais próximo”
 
 **Descrição:**
 Ao clicar no botão “Posto mais próximo”, o mapa posiciona o marcador do usuário no meio do mar, em vez de usar sua localização real.
