@@ -4,23 +4,25 @@
 Ao clicar no botão “Posto mais próximo”, o mapa posiciona o marcador do usuário no meio do mar, em vez de usar sua localização real.
 
 **Passos para reproduzir:**
-1. Acesse: [https://denisenasct.github.io/infosauderecife](https://denisenasct.github.io/infosauderecife)
+1. Acesse o site: [https://denisenasct.github.io/https-github.com-infosauderecife/](https://denisenasct.github.io/https-github.com-infosauderecife/)
 2. Clique no botão “Posto mais próximo”
-3. Veja que o marcador aparece em uma posição inválida (oceano)
+3. Observe que o marcador aparece em uma posição inválida (ex: no oceano)
 
 **Comportamento esperado:**
-O sistema deve obter a localização correta (com permissão) e centralizar o mapa no posto mais próximo real.
+O sistema deve obter a localização correta do usuário (com permissão ativada) e centralizar o mapa no posto de saúde mais próximo.
 
 **Comportamento atual:**
-Marcador aparece no mar ou em coordenadas irreais.
+O marcador aparece no mar ou em coordenadas inválidas, mesmo com geolocalização ativa no navegador.
 
-**Imagem do erro:**
-![Bug de geolocalização]([https://denisenasct.github.io/infosauderecife/img/bug2.JPG](https://github.com/denisenasct/https-github.com-infosauderecife/tree/main/img))
+**Print do erro:**
+![Bug de geolocalização](https://denisenasct.github.io/https-github.com-infosauderecife/img/bug2.JPG)
 
 **Ambiente de teste:**
-- Navegador: Chrome 125
-- Sistema: Windows 10
-- Testado em: 02/06/2025
+- Navegador: Chrome 125  
+- Sistema: Windows 10  
+- Testado em: 02/06/2025  
 
 **Sugestão de correção:**
-Adicionar verificação de permissão de localização e fallback de localização manual.
+Adicionar verificação de permissão de geolocalização, usar `try/catch` para tratar falhas, e oferecer uma alternativa manual caso a geolocalização automática falhe.
+
+
