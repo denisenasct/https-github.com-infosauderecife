@@ -293,16 +293,18 @@ Adicionar verificação de permissão de geolocalização, usar `try/catch` para
 
 
 
-## Diagrama de Atividades Atualizado
+## Diagrama de Atividades Atualizado: Diagrama de Filtro por Posto de Saúde
+    
+![Visão Geral Diagrama de Filtro por Posto de Saúde](imgReadme/Diagrama4.jpeg)
 
-## Diagrama da Seção de Dicas de Saúde
+
+
+## Diagrama de Atividades Atualizado: Diagrama da Seção de Dicas de Saúde
 
 ![Visão Geral Diagrama Dicas de Saúde](imgReadme/Diagrama3.jpeg)
 
 
-## Diagrama de Filtro por Posto de Saúde
-    
-![Visão Geral Diagrama de Filtro por Posto de Saúde](imgReadme/Diagrama4.jpeg)
+
 
 
 
