@@ -85,7 +85,7 @@ O projeto busca reduzir a peregrinação de cidadãos em busca de atendimento, o
 O acesso é gratuito e aberto ao público em geral.
 
 🔗 **Link da plataforma:**  
-[https://info-saude-bd6s.vercel.app/](https://info-saude-bd6s.vercel.app/)
+[https://denisenasct.github.io/https-github.com-infosauderecife/](https://denisenasct.github.io/https-github.com-infosauderecife/)
 
 Não é necessário realizar cadastro ou autenticação.
 
@@ -205,6 +205,13 @@ ___
 <details>
     <summary>Clique para expandir</summary>
 
+
+## 🔗 Recursos do Projeto (Entrega 03)
+
+- **Gerenciamento:**
+    - [Trello](https://trello.com/b/DH96Xoq6/projeto-infosaude)
+
+
    ## Visão do Trello Geral Atualizada com Novas Sprints e Histórias
 
     
@@ -235,6 +242,17 @@ ___
 ## 📖 Entrega 04
 <details>
     <summary>Clique para expandir</summary>
+
+    ## 🔗 Recursos do Projeto (Entrega 01)
+
+- **Gerenciamento:**
+    - [Trello](https://trello.com/b/DH96Xoq6/projeto-infosaude)
+
+- **Apresentação:**
+    - [Slides da Apresentação](https://www.canva.com/design/DAGpOejQOt0/wK5Am8EomKBSgBj7YHpvpA/edit)
+- **Demonstração:**
+    - [Screencast](https://drive.google.com/file/d/1X53gyZxotaYsbJRWsbnN4iZYeIEC44rE/view?usp=drive_link)
+ 
 
 ## Visão do Trello Geral Atualizada com Novas Sprints e Histórias
 
@@ -277,6 +295,14 @@ Adicionar verificação de permissão de geolocalização, usar `try/catch` para
 
 ## Diagrama de Atividades Atualizado
 
+## Diagrama da Seção de Dicas de Saúde
+
+![Visão Geral Diagrama Dicas de Saúde](imgReadme/Diagrama3.jpeg)
+
+
+## Diagrama de Filtro por Posto de Saúde
+    
+![Visão Geral Diagrama de Filtro por Posto de Saúde](imgReadme/Diagrama4.jpeg)
 
 
 
