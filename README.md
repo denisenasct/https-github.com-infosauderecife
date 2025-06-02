@@ -257,6 +257,15 @@ ___
 ## Visão do Trello Geral Atualizada com Novas Sprints e Histórias
 
 
+### 1. Visão Geral do Quadro (Trello)
+
+
+![Visão Geral do Trello](prints/print.trello1.JPG)
+
+![Visão Geral do Trello](prints/print.trello2.JPG)
+
+![Visão Geral do Trello](prints/print.trello1.JPG)
+
 
 ## Screencast com URL e Histórias Implementadas
 
