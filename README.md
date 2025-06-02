@@ -238,13 +238,11 @@ ___
 
 ## Visão do Trello Geral Atualizada com Novas Sprints e Histórias
 
-__
-
 
 
 ## Screecast com URL e Histórias Implementadas
 
-__
+
 
 ## Issue/bug tracker atualizado 
 
@@ -275,14 +273,14 @@ O marcador aparece no mar ou em coordenadas inválidas, mesmo com geolocalizaç�
 **Sugestão de correção:**
 Adicionar verificação de permissão de geolocalização, usar `try/catch` para tratar falhas, e oferecer uma alternativa manual caso a geolocalização automática falhe.
 
-__
+
 
 ## Diagrama de Atividades Atualizado
 
 
 
 
-    </details>
+</details>
 
 ## Justificativa da Escolha da Ferramenta Trello
 <details>
