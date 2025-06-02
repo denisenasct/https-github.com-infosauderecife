@@ -243,7 +243,7 @@ ___
 <details>
     <summary>Clique para expandir</summary>
 
-    ## 🔗 Recursos do Projeto (Entrega 01)
+## 🔗 Recursos do Projeto (Entrega 04)
 
 - **Gerenciamento:**
     - [Trello](https://trello.com/b/DH96Xoq6/projeto-infosaude)
@@ -251,7 +251,7 @@ ___
 - **Apresentação:**
     - [Slides da Apresentação](https://www.canva.com/design/DAGpOejQOt0/wK5Am8EomKBSgBj7YHpvpA/edit)
 - **Demonstração:**
-    - [Screencast](https://drive.google.com/file/d/1X53gyZxotaYsbJRWsbnN4iZYeIEC44rE/view?usp=drive_link)
+    - [Screencast]
  
 
 ## Visão do Trello Geral Atualizada com Novas Sprints e Histórias
