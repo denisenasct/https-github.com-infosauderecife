@@ -264,7 +264,7 @@ ___
 
 ![Visão Geral do Trello](prints/print.trello2.JPG)
 
-![Visão Geral do Trello](prints/print.trello1.JPG)
+![Visão Geral do Trello](prints/print.trello3.JPG)
 
 
 ## Screencast com URL e Histórias Implementadas
