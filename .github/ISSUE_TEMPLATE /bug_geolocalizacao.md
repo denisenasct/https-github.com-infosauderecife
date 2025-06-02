@@ -15,7 +15,7 @@ O sistema deve obter a localização correta (com permissão) e centralizar o ma
 Marcador aparece no mar ou em coordenadas irreais.
 
 **Imagem do erro:**
-![Bug de geolocalização](https://denisenasct.github.io/infosauderecife/img/bug2.JPG)
+![Bug de geolocalização]([https://denisenasct.github.io/infosauderecife/img/bug2.JPG](https://github.com/denisenasct/https-github.com-infosauderecife/tree/main/img))
 
 **Ambiente de teste:**
 - Navegador: Chrome 125
