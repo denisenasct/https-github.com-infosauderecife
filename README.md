@@ -260,11 +260,13 @@ ___
 ### 1. Visão Geral do Quadro (Trello)
 
 
-![Visão Geral do Trello](prints/print.trello1.JPG)
+![Visão Geral do Trello](prints/trelloatualizado1.JPG)
 
-![Visão Geral do Trello](prints/print.trello2.JPG)
+![Visão Geral do Trello](prints/trelloatualizado2.JPG)
 
-![Visão Geral do Trello](prints/print.trello3.JPG)
+![Visão Geral do Trello](prints/trelloatualizado3.JPG)
+
+![Visão Geral do Trello](prints/trelloatualizado4.JPG)
 
 
 ## Screencast com URL e Histórias Implementadas
