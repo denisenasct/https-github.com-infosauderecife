@@ -219,10 +219,10 @@ ___
 
 
    
-   ## Visão do Trello Geral Para Próxima Sprint
+  ## Visão do Trello Geral Para Próxima Sprint
 
    
- ![Visão Geral do Trello Próxima Sprint](imgReadme/novasprint.JPG) 
+  ![Visão Geral do Trello Próxima Sprint](imgReadme/novasprint.JPG) 
 
 ---
 
