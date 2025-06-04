@@ -302,7 +302,7 @@ Adicionar verificação de permissão de geolocalização, usar `try/catch` para
 
 
 
-## Diagrama de Atividades Atualizado: Diagrama de Filtro por Posto de Saúde
+## Diagrama Atualizado:
     
 ![Visão Geral Diagrama Geral](prints/IMG-20250603-WA0011.jpg)
 
@@ -352,6 +352,9 @@ Custo-Benefício: Para o estágio atual do projeto, o Trello oferece uma versão
 ## Diagrama de Filtro por Posto de Saúde
     
 ![Visão Geral Diagrama de Filtro por Posto de Saúde](imgReadme/Diagrama4.jpeg)
+
+![Visão Geral Diagrama de Filtro por Posto de Saúde](prints/IMG-20250603-WA0011.jpg)
+
 
 
 
