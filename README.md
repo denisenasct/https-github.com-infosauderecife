@@ -301,6 +301,10 @@ O marcador aparece no mar ou em coordenadas inválidas, mesmo com geolocalizaç�
 Adicionar verificação de permissão de geolocalização, usar `try/catch` para tratar falhas, e oferecer uma alternativa manual caso a geolocalização automática falhe.
 
 
+## Programação Em Pares
+
+![Programacao em Pares](prints/Screenshot_20250604_101435_WhatsApp.jpg
+
 
 ## Diagrama Atualizado:
     
