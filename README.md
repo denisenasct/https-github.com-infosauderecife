@@ -254,10 +254,7 @@ ___
     - [Screencast](https://drive.google.com/drive/folders/1Mhz5oyf_5OxcyTGdNtxG_KQbgZTJOx58)
  
 
-## Visão do Trello Geral Atualizada com Novas Sprints e Histórias
-
-
-## 1. Visão Geral do Quadro (Trello)
+## Visão Geral do Quadro Trello Atualizada com Novas Sprints e Histórias
 
 
 ![Visão Geral do Trello](prints/trelloatualizado1.JPG)
