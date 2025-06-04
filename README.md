@@ -2,14 +2,14 @@
 
 ![Logo](./img/logoInfoSaude.jpeg)
 
-## 📌 Sobre o Projeto
+## Sobre o Projeto
 A InfoSaúde Recife é uma plataforma digital que está sendo desenvolvida para facilitar o acesso a informações sobre os serviços de saúde pública. Nosso objetivo é otimizar a busca por atendimento, minimizando deslocamentos desnecessários, otmizando a distribuição da demanda nos postos de saúde e melhorando a experiência dos usuários.
 
 A plataforma permitirá a consulta rápida e intuitiva das unidades de saúde disponíveis, oferecendo informações organizadas e acessíveis.
 
 ___
 
-## 🛠 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 <details> 
     <summary>Clique para expandir</summary>
 
@@ -27,7 +27,7 @@ ___
 
 ___
 
-## 📖 Entrega 01
+## Entrega 01
 <details>
     <summary>Clique para expandir</summary>
 
@@ -38,7 +38,7 @@ ___
 ![Backlog](./imgReadme/backlogJira.png)
 
 
-## 🔗 Recursos do Projeto (Entrega 01)
+## Recursos do Projeto (Entrega 01)
 
 - **Gerenciamento:**
     - [Trello](https://trello.com/b/DH96Xoq6/projeto-infosaude)
@@ -55,7 +55,7 @@ ___
 </details>
 
 
-## 📖 Entrega 02
+## Entrega 02
 <details>
     <summary>Clique para expandir</summary>
 
@@ -84,7 +84,7 @@ O projeto busca reduzir a peregrinação de cidadãos em busca de atendimento, o
 ## Como Acessar
 O acesso é gratuito e aberto ao público em geral.
 
-🔗 **Link da plataforma:**  
+ **Link da plataforma:**  
 [https://denisenasct.github.io/https-github.com-infosauderecife/](https://denisenasct.github.io/https-github.com-infosauderecife/)
 
 Não é necessário realizar cadastro ou autenticação.
@@ -93,16 +93,16 @@ Não é necessário realizar cadastro ou autenticação.
 
 ## Navegação pela Plataforma
 
-### 🏠 Home
+### Home
 - Apresentação da proposta do InfoSaúde.
 - Opções de busca de postos de saúde por **localização** ou por **especialidades médicas**.
 - Acesso rápido às informações gerais, como horários de funcionamento e principais serviços oferecidos nos postos.
 
-### 🏥 Distritos
+### Distritos
 - Exibição de postos de saúde organizados por **distritos sanitários** de Recife.
 - Visualização da distribuição dos postos em um **mapa interativo**, permitindo fácil identificação de unidades próximas.
 
-### 🛠️ Menu de Serviços
+### Menu de Serviços
 - **Informações sobre Postos de Saúde:**  
   Endereços, serviços disponíveis e especialidades médicas oferecidas em cada unidade.
 - **Orientações para o Cidadão:**  
@@ -141,7 +141,7 @@ ___
 
 
 
-## 🔗 Recursos do Projeto (Entrega 02)
+## Recursos do Projeto (Entrega 02)
 
 - **Gerenciamento:**
     - [Trello](https://trello.com/b/DH96Xoq6/projeto-infosaude)
@@ -201,12 +201,12 @@ ___
 </details>
 
 
-## 📖 Entrega 03
+## Entrega 03
 <details>
     <summary>Clique para expandir</summary>
 
 
-## 🔗 Recursos do Projeto (Entrega 03)
+## Recursos do Projeto (Entrega 03)
 
 - **Gerenciamento:**
     - [Trello](https://trello.com/b/DH96Xoq6/projeto-infosaude)
@@ -239,11 +239,11 @@ ___
 
 </details>
 
-## 📖 Entrega 04
+## Entrega 04
 <details>
     <summary>Clique para expandir</summary>
 
-## 🔗 Recursos do Projeto (Entrega 04)
+## Recursos do Projeto (Entrega 04)
 
 - **Gerenciamento:**
     - [Trello](https://trello.com/b/DH96Xoq6/projeto-infosaude)
@@ -257,7 +257,7 @@ ___
 ## Visão do Trello Geral Atualizada com Novas Sprints e Histórias
 
 
-### 1. Visão Geral do Quadro (Trello)
+## 1. Visão Geral do Quadro (Trello)
 
 
 ![Visão Geral do Trello](prints/trelloatualizado1.JPG)
@@ -373,7 +373,7 @@ Custo-Benefício: Para o estágio atual do projeto, o Trello oferece uma versão
 
 ___
 
-## 👥 Nossa Equipe
+## Nossa Equipe
 
 - Ana Beatriz Astle
 - Denise Tavares
