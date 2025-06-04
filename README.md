@@ -312,7 +312,7 @@ Essa divisão estratégica no grupo do WhatsApp ajudou a facilitar a comunicaç�
 
 ## Diagrama Atualizado:
     
-![Visão Geral Diagrama Geral](prints/IMG-20250603-WA0011.jpg)
+![Visão Geral Diagrama Geral](prints/diagramageral)
 
 
 
@@ -342,7 +342,6 @@ Custo-Benefício: Para o estágio atual do projeto, o Trello oferece uma versão
     
 ## Diagrama de Atividades
 
-
 ![Visão Geral Diagrama Atividades](prints/diagrama_atividades.jpeg)
 
 ## Diagrama das Informações dos Distritos
@@ -361,7 +360,8 @@ Custo-Benefício: Para o estágio atual do projeto, o Trello oferece uma versão
     
 ![Visão Geral Diagrama de Filtro por Posto de Saúde](imgReadme/Diagrama4.jpeg)
 
-![Visão Geral Diagrama de Filtro por Posto de Saúde](prints/IMG-20250603-WA0011.jpg)
+## Diagrama Geral
+![Visão Geral Diagrama de Filtro por Posto de Saúde](prints/diagramageral)
 
 
 
