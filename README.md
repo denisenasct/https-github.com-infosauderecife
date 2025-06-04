@@ -303,7 +303,11 @@ Adicionar verificação de permissão de geolocalização, usar `try/catch` para
 
 ## Programação Em Pares
 
-![Programacao em Pares](prints/Screenshot_20250604_101435_WhatsApp.jpg
+Organização do grupo por áreas de atuação (organização, geral, desenvolvimento, etc.)
+
+Essa divisão estratégica no grupo do WhatsApp ajudou a facilitar a comunicação e garantir foco nas demandas específicas de cada frente do projeto. A partir disso, estruturamos também a programação em pares, incentivando a colaboração, o aprendizado mútuo e o acompanhamento mais próximo das tarefas. Trabalhar em duplas potencializou a qualidade das entregas e fortaleceu o senso de equipe.
+
+![Programacao em Pares](prints/Screenshot_20250604_101435_WhatsApp.jpg)
 
 
 ## Diagrama Atualizado:
